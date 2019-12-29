@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<form th:action="@{/login}" th:method="post">
+    <div class="form-group">
+        <label for="username">Kundennummer:</label>
+        <input type="text" class="form-control" id="username" name="username"
+               placeholder="Eingabe Kundennummer"></input>
+        <small id="usernamelogin-help" class="form-text text-muted">
+            Bitte geben Sie Ihre Kundennummer ein</small>
+    </div>
+    <div class="form-group">
+        <label for="password">Passwort:</label>
+        <input type="password" class="form-control" id="password" name="password"
+               placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Anmelden</button>
+</form>
+</body>
+</html>
