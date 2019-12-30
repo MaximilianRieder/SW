@@ -1,11 +1,8 @@
 package de.othr.sw.quickstart.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-//@Entity
+@Entity
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,6 +11,7 @@ public class Account {
     private long balance;
     private long creditAmount;
     private long interestRate;
+    @ManyToOne
     private Customer accountHolder;
 
     public long getaID() {
@@ -58,5 +56,16 @@ public class Account {
 
     public void setAccountHolder(Customer accountHolder) {
         this.accountHolder = accountHolder;
+    }
+
+    @ManyToOne(optional = false)
+    private Customer customers;
+
+    public Customer getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Customer customers) {
+        this.customers = customers;
     }
 }

@@ -1,9 +1,6 @@
 package de.othr.sw.quickstart.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 //@Entity
@@ -12,10 +9,14 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long tID;
     private long amount;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private boolean m26credit;
+    @OneToMany
     private Account sender;
+    @OneToMany
     private Account receiver;
+    @Enumerated(EnumType.STRING)
     private TransactionStatus status;
 
     public long getAmount() {

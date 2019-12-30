@@ -1,12 +1,12 @@
 package de.othr.sw.quickstart.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
-//@Entity
+@Entity
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,8 +14,11 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String password;
-    private Adress mainResidence;
-    private LinkedList<Account> accounts;
+    @ManyToOne
+    private Address mainResidence;
+    //@ElementCollection
+    @OneToMany(mappedBy = "accountHolder")
+    private List<Account> accounts;
 
     public long getcID() {
         return cID;
@@ -45,19 +48,19 @@ public class Customer {
         this.password = password;
     }
 
-    public Adress getMainResidence() {
+    public Address getMainResidence() {
         return mainResidence;
     }
 
-    public void setMainResidence(Adress mainResidence) {
+    public void setMainResidence(Address mainResidence) {
         this.mainResidence = mainResidence;
     }
 
-    public LinkedList<Account> getAccounts() {
+    public List<Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(LinkedList<Account> accounts) {
+    public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
 }
