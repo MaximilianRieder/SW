@@ -57,15 +57,4 @@ public class Account {
     public void setAccountHolder(Customer accountHolder) {
         this.accountHolder = accountHolder;
     }
-
-    @ManyToOne(optional = false)
-    private Customer customers;
-
-    public Customer getCustomers() {
-        return customers;
-    }
-
-    public void setCustomers(Customer customers) {
-        this.customers = customers;
-    }
 }
