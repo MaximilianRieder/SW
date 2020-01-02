@@ -1,5 +1,6 @@
 package de.othr.sw.quickstart.controller;
 
+import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.entity.Kunde;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import de.othr.sw.quickstart.service.KundeService;
@@ -27,12 +28,24 @@ public class HomeController {
     @RequestMapping("/login")
     public String goLogin() { return "login";}
 
-    /*@RequestMapping("/registrieren")
-    public String registrieren(
-            @ModelAttribute("vorname") String vname,
-            @ModelAttribute("nachname") String nname,
+    @RequestMapping("/registernew")
+    public String registerNew(
+            @ModelAttribute("firstName") String fname,
+            @ModelAttribute("lastName") String lname,
+            @ModelAttribute("password") String pwd,
+            @ModelAttribute("username") String username,
             Model model
     ) {
+        Customer customer = new Customer();
+        customer.setFirstName(fname);
+        customer.setLastName(lname);
+        customer.setPassword(pwd);
+        customer.setUsername(username);
+        customer.setAccounts(null);
+        customer.setMainResidence(null);
+        customerService.createCustomer(customer);
+        return "login";
+        /*ab hier alt
         Kunde kunde = new Kunde();
         kunde.setVorname(vname);
         kunde.setNachname(nname);
@@ -40,13 +53,6 @@ public class HomeController {
         model.addAttribute("kundennr", kunde.getKundenNr());
 
         return "kundenkonto";
+        */
     }
-
-    @RequestMapping("/login")
-    public String login(
-
-    ) {
-        return "startpage";
-    }*/
-
 }

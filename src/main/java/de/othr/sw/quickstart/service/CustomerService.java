@@ -27,10 +27,10 @@ public class CustomerService implements CustomerServiceIF, UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        Customer customer = customerRepository.findById(Long.parseLong(id))
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Customer customer = customerRepository.findByUsername(username)
                 .orElseThrow(() -> {
-                            throw new UsernameNotFoundException("Customer with Nr. " + id + " doesnt exist");
+                            throw new UsernameNotFoundException("Customer with Nr. " + username + " doesnt exist");
                         }
                 );
         return customer;
