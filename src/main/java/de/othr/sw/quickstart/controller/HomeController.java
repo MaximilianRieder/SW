@@ -1,6 +1,7 @@
 package de.othr.sw.quickstart.controller;
 
 import de.othr.sw.quickstart.entity.Kunde;
+import de.othr.sw.quickstart.service.CustomerServiceIF;
 import de.othr.sw.quickstart.service.KundeService;
 import de.othr.sw.quickstart.service.KundeServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @Autowired
-    private KundeServiceIF kundeService;
+    private CustomerServiceIF customerService;
 
     @RequestMapping("/")
-    public String starten() {
+    public String start() {
         return "index";
     }
 
-    @RequestMapping("/registrieren")
+    @RequestMapping("/register")
+    public String goRegister() { return "register";}
+
+    @RequestMapping("/login")
+    public String goLogin() { return "login";}
+
+    /*@RequestMapping("/registrieren")
     public String registrieren(
             @ModelAttribute("vorname") String vname,
             @ModelAttribute("nachname") String nname,
@@ -34,5 +41,12 @@ public class HomeController {
 
         return "kundenkonto";
     }
+
+    @RequestMapping("/login")
+    public String login(
+
+    ) {
+        return "startpage";
+    }*/
 
 }
