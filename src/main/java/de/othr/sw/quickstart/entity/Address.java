@@ -10,15 +10,15 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long adressID;
+    private long addressID;
     private String street;
     private long number;
     private String zip;
     private String city;
     private String country;
 
-    public long getAdressID() {
-        return adressID;
+    public long getAddressID() {
+        return addressID;
     }
 
     public String getStreet() {

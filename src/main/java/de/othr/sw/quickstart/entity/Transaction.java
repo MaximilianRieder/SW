@@ -3,7 +3,7 @@ package de.othr.sw.quickstart.entity;
 import javax.persistence.*;
 import java.util.Date;
 
-//@Entity
+@Entity
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,9 +12,9 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private boolean m26credit;
-    @OneToMany
+    @ManyToOne
     private Account sender;
-    @OneToMany
+    @ManyToOne
     private Account receiver;
     @Enumerated(EnumType.STRING)
     private TransactionStatus status;

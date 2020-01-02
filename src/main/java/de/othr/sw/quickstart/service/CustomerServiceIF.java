@@ -1,7 +1,7 @@
 package de.othr.sw.quickstart.service;
 
-import de.othr.sw.quickstart.entity.Kunde;
+import de.othr.sw.quickstart.entity.Customer;
 
 public interface CustomerServiceIF {
-    public Kunde kundeAnlegen(Kunde kunde);
+    public void createCustomer(Customer customer);
 }
