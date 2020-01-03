@@ -12,7 +12,7 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long addressID;
     private String street;
-    private long number;
+    private String number;
     private String zip;
     private String city;
     private String country;
@@ -29,11 +29,11 @@ public class Address {
         this.street = street;
     }
 
-    public long getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(long number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

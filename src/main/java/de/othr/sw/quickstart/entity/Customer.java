@@ -84,7 +84,7 @@ public class Customer implements UserDetails {
     }
 
     public List<Account> getAccounts() {
-        return accounts;
+        return Collections.unmodifiableList(this.accounts);
     }
 
     public void setAccounts(List<Account> accounts) {

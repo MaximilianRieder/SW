@@ -7,10 +7,15 @@
 <body>
 <h1>please enter your informations to register</h1>
 <form action="/registernew">
+    Username:<input type="text" name="username"><span th:text="${usernamecheck}"/><br/>
+    Password:<input type="text" name="password"><br/>
     FirstName:<input type="text" name="firstName"><br/>
     LastName:<input type="text" name="lastName"/><br/>
-    Password:<input type="text" name="password"><br/>
-    Username:<input type="text" name="username"><span th:text="${usernamecheck}"/><br/>
+    Street:<input type="text" name="street"/><br/>
+    Number:<input type="text" name="number"/><br/>
+    Zip:<input type="text" name="zip"/><br/>
+    City:<input type="text" name="city"/><br/>
+    Country:<input type="text" name="country"/><br/>
     <input type="submit" value="Register">
 </form>
 </body>
