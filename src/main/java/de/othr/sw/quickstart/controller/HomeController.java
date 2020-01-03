@@ -36,15 +36,23 @@ public class HomeController {
             @ModelAttribute("username") String username,
             Model model
     ) {
-        Customer customer = new Customer();
-        customer.setFirstName(fname);
-        customer.setLastName(lname);
-        customer.setPassword(pwd);
-        customer.setUsername(username);
-        customer.setAccounts(null);
-        customer.setMainResidence(null);
-        customerService.createCustomer(customer);
-        return "login";
+        //check if username is used already
+        if(customerService.isUsernameUsed(username)) {
+            model.addAttribute("usernamecheck", "Username already taken \n");
+            return "register";
+        } else {
+            //register customer
+            Customer customer = new Customer();
+            customer.setFirstName(fname);
+            customer.setLastName(lname);
+            customer.setPassword(pwd);
+            customer.setUsername(username);
+            customer.setAccounts(null);
+            customer.setMainResidence(null);
+            customerService.createCustomer(customer);
+            return "login";
+        }
+
         /*ab hier alt
         Kunde kunde = new Kunde();
         kunde.setVorname(vname);

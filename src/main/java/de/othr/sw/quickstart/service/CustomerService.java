@@ -35,4 +35,13 @@ public class CustomerService implements CustomerServiceIF, UserDetailsService {
                 );
         return customer;
     }
+
+    @Override
+    public boolean isUsernameUsed(String username) {
+        if(customerRepository.findByUsername(username).isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
