@@ -2,17 +2,16 @@ package de.othr.sw.quickstart.controller;
 
 import de.othr.sw.quickstart.entity.Address;
 import de.othr.sw.quickstart.entity.Customer;
-import de.othr.sw.quickstart.entity.Kunde;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
-import de.othr.sw.quickstart.service.KundeService;
-import de.othr.sw.quickstart.service.KundeServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@Scope("session")
 public class HomeController {
 
     @Autowired
@@ -30,7 +29,14 @@ public class HomeController {
     public String goLogin() { return "login";}
 
     @RequestMapping("/startPage")
-    public String goStartPage() { return "startPage";}
+    public String goStartPage(
+            Model model
+    ) {
+        String username;
+        username = customerService.getLoggedInCustomer().getUsername();
+        model.addAttribute("username", username);
+        return "startPage";
+    }
 
     @RequestMapping("/registernew")
     public String registerNew(
@@ -69,15 +75,5 @@ public class HomeController {
             customerService.createCustomer(customer);
             return "login";
         }
-
-        /*ab hier alt
-        Kunde kunde = new Kunde();
-        kunde.setVorname(vname);
-        kunde.setNachname(nname);
-        kunde = kundeService.kundeAnlegen(kunde);
-        model.addAttribute("kundennr", kunde.getKundenNr());
-
-        return "kundenkonto";
-        */
     }
 }
