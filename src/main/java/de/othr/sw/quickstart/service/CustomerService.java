@@ -19,7 +19,7 @@ public class CustomerService implements CustomerServiceIF, UserDetailsService {
 
     @Autowired
     private CustomerRepository customerRepository;
-    
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 

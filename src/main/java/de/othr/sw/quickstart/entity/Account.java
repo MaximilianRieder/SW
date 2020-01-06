@@ -11,7 +11,7 @@ public class Account {
     private long balance;
     private long creditAmount;
     private long interestRate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Customer accountHolder;
 
     public long getaID() {

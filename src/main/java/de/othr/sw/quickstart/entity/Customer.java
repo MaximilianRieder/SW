@@ -17,7 +17,7 @@ public class Customer implements UserDetails {
     private String password;
     private Address mainResidence;
     //@ElementCollection
-    @OneToMany(mappedBy = "accountHolder")
+    @OneToMany(mappedBy = "accountHolder", fetch = FetchType.LAZY)
     private List<Account> accounts;
 
     //for security

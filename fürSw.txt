@@ -1,0 +1,44 @@
+https://stackoverflow.com/questions/18791645/how-to-use-session-attributes-in-spring-mvc#18795626
+
+html:
+<p th:text="${session.wieesheißt}">
+${session.wieesheißt.name == 'hans'}
+
+geht auch th:if
+
+
+
+
+-> mehrere Controler für MVC verwenden?
+-> warum Post weggelöscht?
+-> was ist unterschied zwischen post und get funktionen
+
+
+to.do
+-> löschen von account evtl hinzufügen
+-> logout
+-> evtl brauchts keinen account_owner (rekursion lösen) -> oder funktion finden mit der man auf den nicht owner kommt
+-> standard "header" (navigationsleiste) machen und "wiederverwenden"
+-> evtl Optional nochmal umschreiben
+-> Service Klassen müssen @Transactional sein
+-> account löschen -> geht erst wenn 0 auf dem letzten konto sind
+-> "" nicht als gültigen user zulassen
+-> override hash und equals in entitys
+-> löschen für customer wegen owner
+-> in addresse number auf long ändern
+-> eigene funktion um kontos zu laden -> nicht üver nicht owner sonder extra
+-> config seite bei richtigeem einloggen ändern -> action kein html
+-> einaml mindestens dpdci -> einmal entscheiden welches bean
+-> allen beans muss ein scope zugeteilt sein (dependency inj)
+
+
+Morgen:
+-> accounts anlegen
+-> register in registerSubmit umwandeln -> evtl hier auch register/submit (evtl auch mit post get befassen) -> erste Startseite bilden
+
+
+
+
+Änderungen:
+Adresse kunde -> 1 zu 1
+user bekommt username
