@@ -28,12 +28,13 @@ public class HomeController {
     @RequestMapping("/login")
     public String goLogin() { return "login";}
 
+    //für testzwecke -> "wird zur startpage"
     @RequestMapping("/startPage")
     public String goStartPage(
             Model model
     ) {
         String username;
-        username = customerService.getLoggedInCustomer().getUsername();
+        username = customerService.getLoggedInCustomer().getMainResidence().getCity();
         model.addAttribute("username", username);
         return "startPage";
     }
@@ -71,7 +72,6 @@ public class HomeController {
             customer.setUsername(username);
             customer.setAccounts(null);
             customer.setMainResidence(address);
-            customerService.createAddress(address);
             customerService.createCustomer(customer);
             return "login";
         }

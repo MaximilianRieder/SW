@@ -1,8 +1,6 @@
 package de.othr.sw.quickstart.service;
 
-import de.othr.sw.quickstart.entity.Address;
 import de.othr.sw.quickstart.entity.Customer;
-import de.othr.sw.quickstart.repository.AddressRepository;
 import de.othr.sw.quickstart.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,8 +19,7 @@ public class CustomerService implements CustomerServiceIF, UserDetailsService {
 
     @Autowired
     private CustomerRepository customerRepository;
-    @Autowired
-    private AddressRepository addressRepository;
+    
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -33,10 +30,6 @@ public class CustomerService implements CustomerServiceIF, UserDetailsService {
         return;
     }
 
-    @Override
-    public void createAddress(Address address) {
-        addressRepository.save(address);
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

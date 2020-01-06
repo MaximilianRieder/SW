@@ -1,25 +1,15 @@
 package de.othr.sw.quickstart.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity
+@Embeddable
 public class Address {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long addressID;
     private String street;
     private String number;
     private String zip;
     private String city;
     private String country;
-
-    public long getAddressID() {
-        return addressID;
-    }
 
     public String getStreet() {
         return street;

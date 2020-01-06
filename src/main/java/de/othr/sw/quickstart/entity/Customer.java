@@ -15,7 +15,6 @@ public class Customer implements UserDetails {
     private String firstName;
     private String lastName;
     private String password;
-    @ManyToOne
     private Address mainResidence;
     //@ElementCollection
     @OneToMany(mappedBy = "accountHolder")
