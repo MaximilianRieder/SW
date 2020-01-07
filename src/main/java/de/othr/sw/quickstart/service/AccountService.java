@@ -14,7 +14,9 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    //public Account create Account
+    public Account createAccount() {
+        //care for account customer relation ship -> biderectional
+    }
 
     //create IBAN for new Account (Is no real IBAN, its just for demo purposes(no real BLZ etc.))
     public String createNewIban(Account account) {
@@ -32,12 +34,11 @@ public class AccountService {
             }
         }
         iban = pre + uniqueID;
-        // check if somehow already used or too long -> try random one
+        // check if somehow already used or too long -> try random one until found
         while (true) {
             if ((accountRepository.findByIban(iban).isEmpty()) && (iban.length() == (ibanLength + pre.length()))) {
                 return iban;
             } else {
-                //if already taken try
                 int randomIbanDigits = (int) ((Math.random() * Math.pow(10, (double) (ibanLength - 1)) * 9) + Math.pow(10, (double) (ibanLength - 1)));
                 iban = pre + randomIbanDigits;
             }
