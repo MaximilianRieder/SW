@@ -31,11 +31,6 @@ public class HomeController {
     @RequestMapping("/login")
     public String goLogin() { return "login";}
 
-    /*@RequestMapping("/logout")
-    public String doLogout() {
-
-    }*/
-
     //für testzwecke -> "wird zur startpage"
     @RequestMapping("/startPage")
     public String goStartPage(
@@ -61,8 +56,8 @@ public class HomeController {
             Model model
     ) {
         //check if username is used already
-        if(customerService.isUsernameUsed(username)) {
-            model.addAttribute("usernamecheck", "Username already taken");
+        if((customerService.isUsernameUsed(username)) || (username.length() > 8)) {
+            model.addAttribute("usernamecheck", "Username already taken or too long");
             return "register";
         } else {
             //register customer

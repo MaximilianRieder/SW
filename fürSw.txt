@@ -15,8 +15,9 @@ geht auch th:if
 
 
 to.do
--> löschen von account evtl hinzufügen
--> logout
+-> irgendetwas autowiren was dynamisch ist -> zb konfiguration
+-> löschen von account evtl hinzufügen -> (dabei nur bis zum letzten -> warnung) + (sonst auf anderes konto automatisch)
+-> evtl. geld von einem konto auf ein anderes
 -> evtl brauchts keinen account_owner (rekursion lösen) -> oder funktion finden mit der man auf den nicht owner kommt
 -> standard "header" (navigationsleiste) machen und "wiederverwenden"
 -> evtl Optional nochmal umschreiben
@@ -24,12 +25,14 @@ to.do
 -> account löschen -> geht erst wenn 0 auf dem letzten konto sind
 -> "" nicht als gültigen user zulassen
 -> override hash und equals in entitys
+-> es dürfen nur 99 kontos erstellt werden
 -> löschen für customer wegen owner
 -> in addresse number auf long ändern
 -> eigene funktion um kontos zu laden -> nicht üver nicht owner sonder extra
 -> config seite bei richtigeem einloggen ändern -> action kein html
 -> einaml mindestens dpdci -> einmal entscheiden welches bean
 -> allen beans muss ein scope zugeteilt sein (dependency inj)
+-> evtl iban besser generieren (endlosschleife abfangen)
 
 
 Morgen:

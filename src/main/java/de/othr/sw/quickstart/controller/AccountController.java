@@ -5,14 +5,24 @@ import de.othr.sw.quickstart.service.CustomerServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
 @Scope("session")
+@RequestMapping("/account")
 public class AccountController {
 
     @Autowired
     private CustomerServiceIF customerService;
 
+    /*@RequestMapping("/create")
+    public String goStartPage(
+            Model model
+    ) {
+        Account account = new Account();
+        model.addAttribute("username", username);
+        return "startPage";
+    }*/
 }

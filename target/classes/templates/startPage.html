@@ -14,6 +14,8 @@
 <form action="/login">
     <input type="submit" value="login">
 </form>
-<a href="<c:url value="/logout" />">Logout</a>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>

@@ -7,7 +7,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long aID;
-    private String IBAN;
+    private String iban;
     private long balance;
     private long creditAmount;
     private long interestRate;
@@ -18,12 +18,12 @@ public class Account {
         return aID;
     }
 
-    public String getIBAN() {
-        return IBAN;
+    public String getIban() {
+        return iban;
     }
 
-    public void setIBAN(String IBAN) {
-        this.IBAN = IBAN;
+    public void setIban(String iban) {
+        this.iban = iban;
     }
 
     public long getBalance() {
