@@ -33,6 +33,7 @@ public class AccountController {
         account.setAccountHolder(null);
         accountService.createAccount(account, customerService.getLoggedInCustomer().getUsername());
         model.addAttribute("accountBalance", customerService.getLoggedInCustomer().getAccounts().get(0).getBalance());
+        model.addAttribute("accountUsername", customerService.getLoggedInCustomer().getAccounts().get(0).getAccountHolder().getUsername());
         return "startPage";
     }
 }
