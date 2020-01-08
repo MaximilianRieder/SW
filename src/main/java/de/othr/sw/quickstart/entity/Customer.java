@@ -18,7 +18,7 @@ public class Customer implements UserDetails {
     private Address mainResidence;
     //@ElementCollection
     @OneToMany(mappedBy = "accountHolder", fetch = FetchType.LAZY)
-    private List<Account> accounts;
+    private List<Account> accounts = new LinkedList<>();
 
     //for security
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -33,6 +33,15 @@ public class Customer implements UserDetails {
         return authorites;
     }
 
+    public void addAccount(Account account) {
+        accounts.add(account);
+        account.setAccountHolder(this);
+    }
+
+    public void removeAccount(Account account) {
+        accounts.remove(account);
+        account.setAccountHolder(null);
+    }
     //getter setter
     public void setUsername(String username) {
         this.username = username;

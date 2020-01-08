@@ -4,21 +4,33 @@ import de.othr.sw.quickstart.entity.Account;
 import de.othr.sw.quickstart.entity.Address;
 import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.repository.AccountRepository;
+import de.othr.sw.quickstart.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AccountService {
+public class AccountService implements AccountServiceIF{
     @Autowired
     private CustomerServiceIF customerService;
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-    public Account createAccount() {
+    @Transactional
+    @Override
+    public void createAccount(Account account, String username) {
         //care for account customer relation ship -> biderectional
+        Customer accountHolder = customerRepository.findByUsername(username).get();
+        accountHolder.addAccount(account);
+        customerRepository.save(accountHolder);
+        accountRepository.save(account);
+        return;
     }
 
     //create IBAN for new Account (Is no real IBAN, its just for demo purposes(no real BLZ etc.))
+    @Override
     public String createNewIban(Account account) {
         //standard IBAN header for M26
         Integer ibanLength = 18;
@@ -43,5 +55,10 @@ public class AccountService {
                 iban = pre + randomIbanDigits;
             }
         }
+    }
+
+    @Override
+    public Account getAccountByIban(String iban) {
+        return accountRepository.findByIban(iban).get();
     }
 }

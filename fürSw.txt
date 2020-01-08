@@ -16,6 +16,8 @@ geht auch th:if
 
 to.do
 -> irgendetwas autowiren was dynamisch ist -> zb konfiguration
+-> bei transactional account anlegen schauen ob des alles so funktioniert
+-> nochmal auf die ganzen optional achten -> zum beispiel in accountService bei get account || customer service get cutomer
 -> löschen von account evtl hinzufügen -> (dabei nur bis zum letzten -> warnung) + (sonst auf anderes konto automatisch)
 -> evtl. geld von einem konto auf ein anderes
 -> evtl brauchts keinen account_owner (rekursion lösen) -> oder funktion finden mit der man auf den nicht owner kommt

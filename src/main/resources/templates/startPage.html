@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -16,6 +16,10 @@
 </form>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
+</form>
+<form action="/account/create">
+    <span th:text="${accountBalance}"/><br/>
+    <input type="submit" value="account create">
 </form>
 </body>
 </html>
