@@ -23,6 +23,7 @@ public class AccountService implements AccountServiceIF{
     public void createAccount(Account account, String username) {
         //care for account customer relation ship -> biderectional
         Customer accountHolder = customerRepository.findByUsername(username).get();
+        accountRepository.save(account);
         accountHolder.addAccount(account);
         customerRepository.save(accountHolder);
         accountRepository.save(account);

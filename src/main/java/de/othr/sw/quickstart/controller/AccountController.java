@@ -31,10 +31,8 @@ public class AccountController {
         account.setCreditAmount(0);
         account.setInterestRate(0);
         account.setAccountHolder(null);
-        System.out.println("SAJDFOIJOAISFJIPO");
         accountService.createAccount(account, customerService.getLoggedInCustomer().getUsername());
-        System.out.println("KEKEKEKEKKKEKEKEKKEKEKKE");
-        model.addAttribute("accountBalance", customerService.getLoggedInCustomer().getAccounts().get(1).getBalance());
+        model.addAttribute("accountBalance", customerService.getLoggedInCustomer().getAccounts().get(0).getBalance());
         return "startPage";
     }
 }
