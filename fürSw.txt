@@ -36,6 +36,7 @@ to.do
 -> allen beans muss ein scope zugeteilt sein (dependency inj)
 -> evtl iban besser generieren (endlosschleife abfangen)
 -> security reworken -> Right und Customer Right rauslöschen
+-> evtl set iban bei account creiren weg
 
 
 Morgen:

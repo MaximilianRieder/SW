@@ -2,6 +2,7 @@ package de.othr.sw.quickstart.controller;
 
 import de.othr.sw.quickstart.entity.Address;
 import de.othr.sw.quickstart.entity.Customer;
+import de.othr.sw.quickstart.repository.CustomerRepository;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,6 +20,7 @@ public class HomeController {
 
     @Autowired
     private CustomerServiceIF customerService;
+
 
     @RequestMapping("/")
     public String start() {

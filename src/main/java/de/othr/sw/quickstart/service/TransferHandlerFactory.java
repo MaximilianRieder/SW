@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class TransferFactory {
+public class TransferHandlerFactory {
     @Bean
     @Qualifier("TransferHandlerCustomer")
     public TransferHandlerIF createTHCustomer() {
