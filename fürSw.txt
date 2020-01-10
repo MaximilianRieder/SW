@@ -32,9 +32,10 @@ to.do
 -> in addresse number auf long ändern
 -> eigene funktion um kontos zu laden -> nicht üver nicht owner sonder extra
 -> config seite bei richtigeem einloggen ändern -> action kein html
--> einaml mindestens dpdci -> einmal entscheiden welches bean
+-> einaml mindestens dpdci -> einmal entscheiden welches bean -> irgend einen service anders wo rein inizieren -> evtl bei Kredit transaction -> eigenen transfer Service
 -> allen beans muss ein scope zugeteilt sein (dependency inj)
 -> evtl iban besser generieren (endlosschleife abfangen)
+-> security reworken -> Right und Customer Right rauslöschen
 
 
 Morgen:
@@ -42,8 +43,12 @@ Morgen:
 -> register in registerSubmit umwandeln -> evtl hier auch register/submit (evtl auch mit post get befassen) -> erste Startseite bilden
 
 
+falls dennis abspringt:
+mockito
 
 
 Änderungen:
 Adresse kunde -> 1 zu 1
+Adresse ohne id (embaddable)
 user bekommt username
+kein timestamp

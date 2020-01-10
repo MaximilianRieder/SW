@@ -21,7 +21,6 @@ public class AccountService implements AccountServiceIF{
     @Transactional
     @Override
     public void createAccount(Account account, String username) {
-        //care for account customer relation ship -> biderectional
         Customer accountHolder = customerRepository.findByUsername(username).get();
         accountRepository.save(account);
         accountHolder.addAccount(account);
