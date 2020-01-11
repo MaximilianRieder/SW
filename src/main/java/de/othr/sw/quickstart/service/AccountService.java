@@ -25,6 +25,7 @@ public class AccountService implements AccountServiceIF{
     public void createAccount(Account account, String username) {
         Customer accountHolder = customerRepository.findByUsername(username).get();
         accountRepository.save(account);
+        account.setIban(createNewIban(account));
         accountHolder.addAccount(account);
         customerRepository.save(accountHolder);
         accountRepository.save(account);
@@ -32,7 +33,6 @@ public class AccountService implements AccountServiceIF{
     }
 
     //create IBAN for new Account (Is no real IBAN, its just for demo purposes(no real BLZ etc.))
-    @Override
     public String createNewIban(Account account) {
         //standard IBAN header for M26
         int ibanLength = 18;

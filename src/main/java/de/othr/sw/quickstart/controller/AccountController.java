@@ -24,19 +24,19 @@ public class AccountController {
             Model model
     ) {
         Account account = new Account();
-        //account.setIban(accountService.createNewIban(account));
-        account.setIban(accountService.createNewIban(account));
         //5000 euro start balance (500000 cent)
         account.setBalance(500000);
         account.setCreditAmount(0);
         account.setInterestRate(0);
         account.setAccountHolder(null);
         accountService.createAccount(account, customerService.getLoggedInCustomer().getUsername());
-        model.addAttribute("accountBalance", customerService.getLoggedInCustomer().getAccounts().get(0).getBalance());
+        //model.addAttribute("accountBalance", customerService.getLoggedInCustomer().getAccounts().get(0).getBalance());
         //model.addAttribute("accountUsername", customerService.getLoggedInCustomer().getAccounts().get(0).getIban());
-        if(customerService.getLoggedInCustomer().getAccounts().get(1) != null) {
-            model.addAttribute("accountUsername", customerService.getLoggedInCustomer().getAccounts().get(1).getIban());
+        for (Account a:customerService.getLoggedInCustomer().getAccounts()) {
+            model.addAttribute("accountUsername", a.getIban());
+            model.addAttribute("accountBalance", a.getaID());
         }
+
         return "startPage";
     }
 }

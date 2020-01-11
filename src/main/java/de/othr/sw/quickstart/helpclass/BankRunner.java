@@ -39,7 +39,6 @@ public class BankRunner implements CommandLineRunner {
         customer.setMainResidence(address);
         customerService.createCustomer(customer);
         Account account = new Account();
-        account.setIban(accountService.createNewIban(account));
         //5000000 euro start balance (500000000 cent)
         account.setBalance(500000000);
         account.setCreditAmount(0);
