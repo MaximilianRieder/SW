@@ -25,7 +25,7 @@ public class AccountController {
     ) {
         Account account = new Account();
         //account.setIban(accountService.createNewIban(account));
-        account.setIban("testIban");
+        account.setIban(accountService.createNewIban(account));
         //5000 euro start balance (500000 cent)
         account.setBalance(500000);
         account.setCreditAmount(0);
@@ -33,7 +33,10 @@ public class AccountController {
         account.setAccountHolder(null);
         accountService.createAccount(account, customerService.getLoggedInCustomer().getUsername());
         model.addAttribute("accountBalance", customerService.getLoggedInCustomer().getAccounts().get(0).getBalance());
-        model.addAttribute("accountUsername", customerService.getLoggedInCustomer().getAccounts().get(0).getAccountHolder().getUsername());
+        //model.addAttribute("accountUsername", customerService.getLoggedInCustomer().getAccounts().get(0).getIban());
+        if(customerService.getLoggedInCustomer().getAccounts().get(1) != null) {
+            model.addAttribute("accountUsername", customerService.getLoggedInCustomer().getAccounts().get(1).getIban());
+        }
         return "startPage";
     }
 }
