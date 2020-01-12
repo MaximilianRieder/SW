@@ -1,12 +1,63 @@
 package de.othr.sw.quickstart.service;
 
-public class TransferHandlerCustomer implements TransferHandlerIF {
-    @Override
-    public boolean sendMoney(String receiverIban, Long amount) {
-        //check if enough money
-        //create entitys / change entitys
-        //persist
+import de.othr.sw.quickstart.entity.Account;
+import de.othr.sw.quickstart.entity.Customer;
+import de.othr.sw.quickstart.entity.Transaction;
+import de.othr.sw.quickstart.entity.TransactionStatus;
+import de.othr.sw.quickstart.repository.AccountRepository;
+import de.othr.sw.quickstart.repository.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
-        return true;
+import java.util.Date;
+import java.util.Optional;
+
+public class TransferHandlerCustomer implements TransferHandlerIF {
+    @Autowired
+    TransactionRepository transactionRepository;
+    @Autowired
+    AccountRepository accountRepository;
+
+    Date date;
+    @Override
+    public boolean transferMoney(String receiverIban, String senderIban, Long amount) {
+        //check if ibans correct
+        Optional<Account> receiverAccountO = accountRepository.findByIban(receiverIban);
+        Optional<Account> senderAccountO = accountRepository.findByIban(receiverIban);
+        if((receiverAccountO.isEmpty()) || (senderAccountO.isEmpty())) {
+            return false;
+        }
+        Account receiverAccount = receiverAccountO.get();
+        Account senderAccount = senderAccountO.get();
+        //check if enough money
+        if (senderAccount.getBalance() < amount) {
+            //create failed transaction
+            date = java.util.Calendar.getInstance().getTime();
+            Transaction transaction = new Transaction();
+            transaction.setDate(date);
+            transaction.setAmount(amount);
+            transaction.setM26credit(false);
+            transaction.setSender(senderAccount);
+            transaction.setReceiver(receiverAccount);
+            transaction.setStatus(TransactionStatus.FAILURE);
+            transactionRepository.save(transaction);
+            return false;
+        } else {
+            //transaction worked
+            senderAccount.setBalance(senderAccount.getBalance() - amount);
+            receiverAccount.setBalance(receiverAccount.getBalance() + amount);
+            accountRepository.save(senderAccount);
+            accountRepository.save(receiverAccount);
+            //create working transaction
+            date = java.util.Calendar.getInstance().getTime();
+            Transaction transaction = new Transaction();
+            transaction.setDate(date);
+            transaction.setAmount(amount);
+            transaction.setM26credit(false);
+            transaction.setSender(senderAccount);
+            transaction.setReceiver(receiverAccount);
+            transaction.setStatus(TransactionStatus.SUCCESS);
+            transactionRepository.save(transaction);
+            return true;
+        }
     }
 }

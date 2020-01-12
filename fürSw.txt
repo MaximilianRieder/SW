@@ -37,6 +37,11 @@ to.do
 -> evtl iban besser generieren (endlosschleife abfangen)
 -> security reworken -> Right und Customer Right rauslöschen
 -> evtl set iban bei account creiren weg
+-> evtl throws Exception bei getLoggedInCustomer
+-> in übersicht Account -> use for Transaction setzen -> Feld beim erstellen von neuem Konto wo man setzten kann
+-> evtl dont use for transactions -> für dependency injection
+
+-----------> standardmäßig andere bankkontos durchsuchen wenn nicht genug für credit für dci 
 
 
 Morgen:
@@ -53,3 +58,5 @@ Adresse kunde -> 1 zu 1
 Adresse ohne id (embaddable)
 user bekommt username
 kein timestamp
+account rückzahlungsrate
+evtl kredit entity

@@ -26,8 +26,6 @@ public class AccountController {
         Account account = new Account();
         //5000 euro start balance (500000 cent)
         account.setBalance(500000);
-        account.setCreditAmount(0);
-        account.setInterestRate(0);
         account.setAccountHolder(null);
         accountService.createAccount(account, customerService.getLoggedInCustomer().getUsername());
         //model.addAttribute("accountBalance", customerService.getLoggedInCustomer().getAccounts().get(0).getBalance());

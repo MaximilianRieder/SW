@@ -24,11 +24,14 @@ public class AccountService implements AccountServiceIF{
     @Override
     public void createAccount(Account account, String username) {
         Customer accountHolder = customerRepository.findByUsername(username).get();
-        accountRepository.save(account);
+        account = accountRepository.save(account);
         account.setIban(createNewIban(account));
+//        account.setCreditAmount(0);
+//        account.setInterestRate(0);
+        account.setCredit(null);
         accountHolder.addAccount(account);
-        customerRepository.save(accountHolder);
-        accountRepository.save(account);
+        accountHolder = customerRepository.save(accountHolder);
+        account = accountRepository.save(account);
         return;
     }
 
@@ -64,6 +67,7 @@ public class AccountService implements AccountServiceIF{
         return uniqueID;
     }
 
+    //löschen
     @Override
     public Account getAccountByIban(String iban) {
         return accountRepository.findByIban(iban).get();

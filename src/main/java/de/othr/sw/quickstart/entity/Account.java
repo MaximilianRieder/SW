@@ -9,8 +9,9 @@ public class Account {
     private long aID;
     private String iban;
     private long balance;
-    private long creditAmount;
-    private long interestRate;
+//    private long creditAmount;
+//    private long interestRate;
+    private Credit credit;
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer accountHolder;
 
@@ -20,6 +21,14 @@ public class Account {
 
     public String getIban() {
         return iban;
+    }
+
+    public Credit getCredit() {
+        return credit;
+    }
+
+    public void setCredit(Credit credit) {
+        this.credit = credit;
     }
 
     public void setIban(String iban) {
@@ -34,21 +43,21 @@ public class Account {
         this.balance = balance;
     }
 
-    public long getCreditAmount() {
-        return creditAmount;
-    }
-
-    public void setCreditAmount(long creditAmount) {
-        this.creditAmount = creditAmount;
-    }
-
-    public long getInterestRate() {
-        return interestRate;
-    }
-
-    public void setInterestRate(long interestRate) {
-        this.interestRate = interestRate;
-    }
+//    public long getCreditAmount() {
+//        return creditAmount;
+//    }
+//
+//    public void setCreditAmount(long creditAmount) {
+//        this.creditAmount = creditAmount;
+//    }
+//
+//    public long getInterestRate() {
+//        return interestRate;
+//    }
+//
+//    public void setInterestRate(long interestRate) {
+//        this.interestRate = interestRate;
+//    }
 
     public Customer getAccountHolder() {
         return accountHolder;

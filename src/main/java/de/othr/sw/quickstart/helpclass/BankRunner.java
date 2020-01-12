@@ -41,8 +41,8 @@ public class BankRunner implements CommandLineRunner {
         Account account = new Account();
         //5000000 euro start balance (500000000 cent)
         account.setBalance(500000000);
-        account.setCreditAmount(0);
-        account.setInterestRate(0);
+//        account.setCreditAmount(0);
+//        account.setInterestRate(0);
         accountService.createAccount(account, "m26");
     }
 }
