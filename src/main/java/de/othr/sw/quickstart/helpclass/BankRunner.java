@@ -2,11 +2,9 @@ package de.othr.sw.quickstart.helpclass;
 
 import de.othr.sw.quickstart.entity.Account;
 import de.othr.sw.quickstart.entity.Address;
+import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Customer;
-import de.othr.sw.quickstart.repository.CustomerRepository;
-import de.othr.sw.quickstart.service.AccountService;
 import de.othr.sw.quickstart.service.AccountServiceIF;
-import de.othr.sw.quickstart.service.CustomerService;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -41,6 +39,11 @@ public class BankRunner implements CommandLineRunner {
         Account account = new Account();
         //5000000 euro start balance (500000000 cent)
         account.setBalance(500000000);
+        //credit setzen auf 0
+//        Credit credit = new Credit();
+//        credit.setAmount(0);
+//        credit.setInterestRate(0);
+//        account.setCredit(credit);
 //        account.setCreditAmount(0);
 //        account.setInterestRate(0);
         accountService.createAccount(account, "m26");

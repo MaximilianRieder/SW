@@ -6,30 +6,30 @@ import javax.persistence.*;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long aID;
+    private long id;
     private String iban;
     private long balance;
 //    private long creditAmount;
 //    private long interestRate;
-    private Credit credit;
+//    private Credit credit;
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer accountHolder;
 
-    public long getaID() {
-        return aID;
+    public long getId() {
+        return id;
     }
 
     public String getIban() {
         return iban;
     }
 
-    public Credit getCredit() {
-        return credit;
-    }
-
-    public void setCredit(Credit credit) {
-        this.credit = credit;
-    }
+//    public Credit getCredit() {
+//        return credit;
+//    }
+//
+//    public void setCredit(Credit credit) {
+//        this.credit = credit;
+//    }
 
     public void setIban(String iban) {
         this.iban = iban;

@@ -1,3 +1,8 @@
+Letzter Stand To do: transaction sollte eigentlich angelegt werden -> List funktioniert noch nicht 
+
+
+
+
 https://stackoverflow.com/questions/18791645/how-to-use-session-attributes-in-spring-mvc#18795626
 
 html:
@@ -7,9 +12,6 @@ ${session.wieesheißt.name == 'hans'}
 geht auch th:if
 
 
-
-
--> mehrere Controler für MVC verwenden?
 -> warum Post weggelöscht?
 -> was ist unterschied zwischen post und get funktionen
 
@@ -40,17 +42,17 @@ to.do
 -> evtl throws Exception bei getLoggedInCustomer
 -> in übersicht Account -> use for Transaction setzen -> Feld beim erstellen von neuem Konto wo man setzten kann
 -> evtl dont use for transactions -> für dependency injection
+-> credit enttiy hinzufügen
 
 -----------> standardmäßig andere bankkontos durchsuchen wenn nicht genug für credit für dci 
 
 
-Morgen:
--> accounts anlegen
--> register in registerSubmit umwandeln -> evtl hier auch register/submit (evtl auch mit post get befassen) -> erste Startseite bilden
-
 
 falls dennis abspringt:
 mockito
+
+Merken:
+man kann nur einen Kredit pro Konto haben
 
 
 Änderungen:

@@ -1,7 +1,6 @@
 package de.othr.sw.quickstart.service;
 
 import de.othr.sw.quickstart.entity.Account;
-import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.entity.Transaction;
 import de.othr.sw.quickstart.entity.TransactionStatus;
 import de.othr.sw.quickstart.repository.AccountRepository;
@@ -16,8 +15,8 @@ public class TransferHandlerCustomer implements TransferHandlerIF {
     TransactionRepository transactionRepository;
     @Autowired
     AccountRepository accountRepository;
-
     Date date;
+
     @Override
     public boolean transferMoney(String receiverIban, String senderIban, Long amount) {
         //check if ibans correct

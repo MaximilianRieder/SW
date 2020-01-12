@@ -1,7 +1,6 @@
 package de.othr.sw.quickstart.controller;
 
 import de.othr.sw.quickstart.entity.Account;
-import de.othr.sw.quickstart.service.AccountService;
 import de.othr.sw.quickstart.service.AccountServiceIF;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class AccountController {
         //model.addAttribute("accountUsername", customerService.getLoggedInCustomer().getAccounts().get(0).getIban());
         for (Account a:customerService.getLoggedInCustomer().getAccounts()) {
             model.addAttribute("accountUsername", a.getIban());
-            model.addAttribute("accountBalance", a.getaID());
+            model.addAttribute("accountBalance", a.getId());
         }
 
         return "startPage";

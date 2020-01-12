@@ -10,7 +10,7 @@ import java.util.*;
 public class Customer implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long cID;
+    private long id;
     private String username;
     private String firstName;
     private String lastName;
@@ -55,8 +55,8 @@ public class Customer implements UserDetails {
         this.customerRights = customerRights;
     }
 
-    public long getcID() {
-        return cID;
+    public long getId() {
+        return id;
     }
 
     public String getFirstName() {

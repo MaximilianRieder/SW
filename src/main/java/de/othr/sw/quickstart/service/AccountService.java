@@ -1,15 +1,12 @@
 package de.othr.sw.quickstart.service;
 
 import de.othr.sw.quickstart.entity.Account;
-import de.othr.sw.quickstart.entity.Address;
 import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.criteria.CriteriaBuilder;
 
 @Service
 public class AccountService implements AccountServiceIF{
@@ -25,10 +22,12 @@ public class AccountService implements AccountServiceIF{
     public void createAccount(Account account, String username) {
         Customer accountHolder = customerRepository.findByUsername(username).get();
         account = accountRepository.save(account);
-        account.setIban(createNewIban(account));
+        String iban = createNewIban(account);
+        System.out.println(iban);
+        account.setIban(iban);
 //        account.setCreditAmount(0);
 //        account.setInterestRate(0);
-        account.setCredit(null);
+//        account.setCredit(null);
         accountHolder.addAccount(account);
         accountHolder = customerRepository.save(accountHolder);
         account = accountRepository.save(account);
@@ -42,7 +41,7 @@ public class AccountService implements AccountServiceIF{
         String pre = "DE26";
         String iban;
         //create rest of iban
-        String uniqueID = Long.toString(account.getaID());
+        String uniqueID = Long.toString(account.getId());
         //use accountID for creation
         uniqueID = fillWithZero(uniqueID, ibanLength);
         iban = pre + uniqueID;

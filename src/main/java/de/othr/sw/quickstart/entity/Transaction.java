@@ -7,7 +7,7 @@ import java.util.Date;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long tID;
+    private long id;
     private long amount;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
@@ -67,7 +67,7 @@ public class Transaction {
         this.status = status;
     }
 
-    public long gettID() {
-        return tID;
+    public long getId() {
+        return id;
     }
 }
