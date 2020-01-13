@@ -34,7 +34,7 @@ public class TransactionController {
 //            model.addAttribute("accountBalance", a.getId());
 //        }
         transactionService.transfer("DE26000000000000000004", "DE26000000000000000002", l);
-        List<Transaction> list = transactionService.getLastTransactions(customerService.getLoggedInCustomer());
+        List<Transaction> list = transactionService.getLastTransactions(customerService.getLoggedInCustomer(), 5);
         for (Transaction t: list
              ) {
             model.addAttribute("transfereins", Long.toString(t.getAmount()));

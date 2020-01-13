@@ -1,5 +1,6 @@
 package de.othr.sw.quickstart.service;
 
+import de.othr.sw.quickstart.entity.Account;
 import de.othr.sw.quickstart.entity.Customer;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,14 +37,24 @@ public class TransactionService implements TransactionServiceIF {
     }
 
     @Override
-    public List<Transaction> getLastTransactions(Customer customer) {
-        Long customerId = customer.getId();
-        Pageable pageable = PageRequest.of(0, 1, Sort.by("date").descending());
-        Page<Transaction> page = transactionRepository.findAllByReceiver_id(customerId, pageable);
-        List<Transaction> transactions = page.getContent();
+    public List<Transaction> getLastTransactions(Customer customer, int number) {
+        List<Account> accounts = customer.getAccounts();
+        List<Long> accountIds = new LinkedList<>();
+        List<Transaction> transactions = new LinkedList<>();
+        for (Account a: accounts
+             ) {
+            accountIds.add(a.getId());
+        }
+        for (Long s: accountIds
+        ) {
+            Pageable pageable = PageRequest.of(0, number, Sort.by("date").descending());
+            Page<Transaction> page = transactionRepository.findByReceiver_IdAndSender_Id(s,s,pageable);
+            transactions.addAll(page.getContent());
+        }
+
         for (Transaction t: transactions
              ) {
-            System.out.println("leleck");
+            System.out.println(t.getDate());
         }
         return transactions;
     }

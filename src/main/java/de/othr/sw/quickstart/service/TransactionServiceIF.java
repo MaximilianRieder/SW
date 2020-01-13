@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TransactionServiceIF {
     public boolean transfer(String senderIban, String receiverIban, Long amount);
-    public List<Transaction> getLastTransactions(Customer customer);
+    public List<Transaction> getLastTransactions(Customer customer, int number);
 }
