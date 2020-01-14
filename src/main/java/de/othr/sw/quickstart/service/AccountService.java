@@ -26,6 +26,7 @@ public class AccountService implements AccountServiceIF{
         credit.setActiveCredit(false);
         credit.setInterestRate(0);
         credit.setAmount(0);
+        credit.setRepaymentRate(0);
         account.setCredit(credit);
         account = accountRepository.save(account);
         String iban = createNewIban(account);

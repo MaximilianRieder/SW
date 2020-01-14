@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Credit {
     private long amount;
     private long interestRate;
+    private long repaymentRate;
     private boolean activeCredit;
 
     public long getAmount() {
@@ -14,6 +15,14 @@ public class Credit {
 
     public void setAmount(long amount) {
         this.amount = amount;
+    }
+
+    public long getRepaymentRate() {
+        return repaymentRate;
+    }
+
+    public void setRepaymentRate(long repaymentRate) {
+        this.repaymentRate = repaymentRate;
     }
 
     public long getInterestRate() {

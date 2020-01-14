@@ -1,4 +1,4 @@
 package de.othr.sw.quickstart.service;
 
-public class CreditService {
+public class CreditService implements CreditServiceIF{
 }

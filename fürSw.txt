@@ -57,3 +57,4 @@ user bekommt username
 kein timestamp
 account rückzahlungsrate
 evtl kredit entity
+added repayment rate
