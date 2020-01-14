@@ -1,10 +1,12 @@
 package de.othr.sw.quickstart.service;
 
 import de.othr.sw.quickstart.entity.Account;
+import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Transaction;
 import de.othr.sw.quickstart.entity.TransactionStatus;
 import de.othr.sw.quickstart.helpclass.M26Config;
 import de.othr.sw.quickstart.repository.AccountRepository;
+import de.othr.sw.quickstart.repository.CreditRepository;
 import de.othr.sw.quickstart.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +18,8 @@ public class TransferHandlerCredit implements TransferHandlerIF {
     TransactionRepository transactionRepository;
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    CreditRepository creditRepository;
     Date date;
 
     @Override
@@ -53,27 +57,34 @@ public class TransferHandlerCredit implements TransferHandlerIF {
             return false;
         } else {
             //transaction worked
+            //set new balance
             senderAccount.setBalance(senderAccount.getBalance() - amount);
             receiverAccount.setBalance(receiverAccount.getBalance() + amount);
 
-            receiverAccount.getCredit().setRepaymentRate(repaymentRate);
-            receiverAccount.getCredit().setInterestRate(M26Config.standardInterestRate);
-            receiverAccount.getCredit().setAmount(amountCred);
-            receiverAccount.getCredit().setActiveCredit(true);
+            //make credit and safe
+            Credit credit = new Credit();
+            credit.setRepaymentRate(repaymentRate);
+            credit.setInterestRate(M26Config.standardInterestRate);
+            credit.setAmount(amount);
+            credit.setRemainingAmountBack(amountCred);
+            credit.setActiveCredit(true);
+            creditRepository.save(credit);
 
+            //set credit
+            receiverAccount.addCredit(credit);
+
+            //update accounts
             accountRepository.save(senderAccount);
             accountRepository.save(receiverAccount);
+
             //create working transaction
             date = java.util.Calendar.getInstance().getTime();
             Transaction transaction = new Transaction();
             transaction.setDate(date);
-
             //set the actual credit amount with interestRate
             transaction.setAmount(amount);
-
             //set credit flag in transaction
             transaction.setM26credit(true);
-
             transaction.setSender(senderAccount);
             transaction.setReceiver(receiverAccount);
             transaction.setStatus(TransactionStatus.SUCCESS);

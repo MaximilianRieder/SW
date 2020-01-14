@@ -1,6 +1,8 @@
 package de.othr.sw.quickstart.entity;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 public class Account {
@@ -11,9 +13,19 @@ public class Account {
     private long balance;
 //    private long creditAmount;
 //    private long interestRate;
-    private Credit credit;
+    @OneToMany
+    private List<Credit> credits;
     @ManyToOne(fetch = FetchType.LAZY)
     private Customer accountHolder;
+
+    public void addCredit(Credit credit) {
+        credits.add(credit);
+    }
+
+    public void removeAccount(Credit credit) {
+        credits.add(credit);
+
+    }
 
     public long getId() {
         return id;
@@ -23,12 +35,12 @@ public class Account {
         return iban;
     }
 
-    public Credit getCredit() {
-        return credit;
+    public List<Credit> getCredits() {
+        return credits;
     }
 
-    public void setCredit(Credit credit) {
-        this.credit = credit;
+    public void setCredits(List<Credit> credits) {
+        this.credits = credits;
     }
 
     public void setIban(String iban) {

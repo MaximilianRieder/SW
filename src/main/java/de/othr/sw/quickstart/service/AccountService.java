@@ -22,14 +22,15 @@ public class AccountService implements AccountServiceIF{
     @Override
     public void createAccount(Account account, String username) {
         Customer accountHolder = customerRepository.findByUsername(username).get();
-        Credit credit = new Credit();
-        credit.setActiveCredit(false);
-        credit.setInterestRate(0);
-        credit.setAmount(0);
-        credit.setRepaymentRate(0);
-        account.setCredit(credit);
+//        Credit credit = new Credit();
+//        credit.setActiveCredit(false);
+//        credit.setInterestRate(0);
+//        credit.setAmount(0);
+//        credit.setRepaymentRate(0);
+//        account.setCredit(credit);
         account = accountRepository.save(account);
         String iban = createNewIban(account);
+        account.setCredits(null);
         System.out.println(iban);
         account.setIban(iban);
         accountHolder.addAccount(account);

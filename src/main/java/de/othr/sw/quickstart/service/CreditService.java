@@ -26,11 +26,8 @@ public class CreditService implements CreditServiceIF{
     @Transactional
     @Override
     public boolean requestCredit(String receiverIban, long amount) {
-        //check if account exists and if there is already a credit on the account (only one credit per account allowed)
+        //check if there is already a credit on the account (only one credit per account allowed)
         if (accountRepository.findByIban(receiverIban).isEmpty()) {
-            return false;
-        }
-        if (accountRepository.findByIban(receiverIban).get().getCredit().isActiveCredit()) {
             return false;
         }
         //get accounts from bank

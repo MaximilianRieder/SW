@@ -1,6 +1,7 @@
 package de.othr.sw.quickstart.controller;
 
 import de.othr.sw.quickstart.entity.Account;
+import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Transaction;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.service.CreditServiceIF;
@@ -48,7 +49,10 @@ public class TransactionController {
         Optional<Account> testa = accountRepository.findByIban("DE26000000000000000004");
         for (Transaction t: list
              ) {
-            model.addAttribute("transfereins", Long.toString(t.getReceiver().getCredit().getAmount()));
+            for (Credit c:t.getReceiver().getCredits()
+                 ) {
+                model.addAttribute("transfereins", Long.toString(c.getAmount()));
+            }
         }
         return "startPage";
     }

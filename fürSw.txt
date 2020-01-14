@@ -18,6 +18,8 @@ geht auch th:if
 
 to.do
 -> abspeichern wie viel der Kredit gekostet hat -> mit interest rate
+-> evtl schauen ob bei account get accounts noch unmodifiable werden muss
+-> orphan removal bei credit und account
 -> config klasse bei allem usen
 -> Kommentare schreiben
 -> wegen long nochmal schauen -> muss man kasten oder anders deklasieren 0L

@@ -2,8 +2,11 @@ package de.othr.sw.quickstart.entity;
 
 import javax.persistence.*;
 
-@Embeddable
+@Entity
 public class Credit {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     private long amount;
     //interest Rate in promille
     private long interestRate;
@@ -11,6 +14,15 @@ public class Credit {
     private long repaymentRate;
     //to check if there is a credit
     private boolean activeCredit;
+    private long remainingAmountBack;
+
+    public long getRemainingAmountBack() {
+        return remainingAmountBack;
+    }
+
+    public void setRemainingAmountBack(long remainingAmount) {
+        this.remainingAmountBack = remainingAmount;
+    }
 
     public long getAmount() {
         return amount;
