@@ -5,8 +5,11 @@ import javax.persistence.*;
 @Embeddable
 public class Credit {
     private long amount;
+    //interest Rate in promille
     private long interestRate;
+    //amount of money per month payed back
     private long repaymentRate;
+    //to check if there is a credit
     private boolean activeCredit;
 
     public long getAmount() {

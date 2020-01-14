@@ -29,23 +29,16 @@ public class BankRunner implements CommandLineRunner {
         address.setCity("Regensburg");
         address.setCountry("Germany");
         Customer customer = new Customer();
-        customer.setFirstName("m26");
-        customer.setLastName("m26");
-        customer.setPassword("m26");
-        customer.setUsername("m26");
+        customer.setFirstName(M26Config.bankName);
+        customer.setLastName(M26Config.bankName);
+        customer.setPassword(M26Config.bankName);
+        customer.setUsername(M26Config.bankName);
         customer.setAccounts(null);
         customer.setMainResidence(address);
         customerService.createCustomer(customer);
         Account account = new Account();
         //5000000 euro start balance (500000000 cent)
         account.setBalance(500000000);
-        //credit setzen auf 0
-//        Credit credit = new Credit();
-//        credit.setAmount(0);
-//        credit.setInterestRate(0);
-//        account.setCredit(credit);
-//        account.setCreditAmount(0);
-//        account.setInterestRate(0);
         accountService.createAccount(account, "m26");
     }
 }

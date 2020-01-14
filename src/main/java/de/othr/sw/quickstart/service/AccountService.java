@@ -32,9 +32,6 @@ public class AccountService implements AccountServiceIF{
         String iban = createNewIban(account);
         System.out.println(iban);
         account.setIban(iban);
-//        account.setCreditAmount(0);
-//        account.setInterestRate(0);
-//        account.setCredit(null);
         accountHolder.addAccount(account);
         accountHolder = customerRepository.save(accountHolder);
         account = accountRepository.save(account);
