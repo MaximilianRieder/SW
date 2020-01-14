@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Credit {
     private long amount;
     private long interestRate;
+    private boolean activeCredit;
 
     public long getAmount() {
         return amount;
@@ -21,5 +22,13 @@ public class Credit {
 
     public void setInterestRate(long interestRate) {
         this.interestRate = interestRate;
+    }
+
+    public boolean isActiveCredit() {
+        return activeCredit;
+    }
+
+    public void setActiveCredit(boolean activeCredit) {
+        this.activeCredit = activeCredit;
     }
 }

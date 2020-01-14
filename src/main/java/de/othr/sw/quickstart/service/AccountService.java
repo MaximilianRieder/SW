@@ -1,6 +1,7 @@
 package de.othr.sw.quickstart.service;
 
 import de.othr.sw.quickstart.entity.Account;
+import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CustomerRepository;
@@ -21,6 +22,11 @@ public class AccountService implements AccountServiceIF{
     @Override
     public void createAccount(Account account, String username) {
         Customer accountHolder = customerRepository.findByUsername(username).get();
+        Credit credit = new Credit();
+        credit.setActiveCredit(false);
+        credit.setInterestRate(0);
+        credit.setAmount(0);
+        account.setCredit(credit);
         account = accountRepository.save(account);
         String iban = createNewIban(account);
         System.out.println(iban);

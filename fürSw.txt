@@ -17,33 +17,28 @@ geht auch th:if
 
 
 to.do
--> irgendetwas autowiren was dynamisch ist -> zb konfiguration
 -> bei transactional account anlegen schauen ob des alles so funktioniert
 -> nochmal auf die ganzen optional achten -> zum beispiel in accountService bei get account || customer service get cutomer
+-> evtl Optional nochmal umschreiben
 -> löschen von account evtl hinzufügen -> (dabei nur bis zum letzten -> warnung) + (sonst auf anderes konto automatisch)
 -> evtl. geld von einem konto auf ein anderes
--> evtl brauchts keinen account_owner (rekursion lösen) -> oder funktion finden mit der man auf den nicht owner kommt
--> standard "header" (navigationsleiste) machen und "wiederverwenden"
--> evtl Optional nochmal umschreiben
--> Service Klassen müssen @Transactional sein
 -> account löschen -> geht erst wenn 0 auf dem letzten konto sind
+-> es dürfen nur 99 kontos erstellt werden
+-> standard "header" (navigationsleiste) machen und "wiederverwenden"
+-> Service Klassen müssen @Transactional sein
 -> "" nicht als gültigen user zulassen
 -> override hash und equals in entitys
--> es dürfen nur 99 kontos erstellt werden
 -> löschen für customer wegen owner
 -> in addresse number auf long ändern
--> eigene funktion um kontos zu laden -> nicht üver nicht owner sonder extra
 -> config seite bei richtigeem einloggen ändern -> action kein html
--> einaml mindestens dpdci -> einmal entscheiden welches bean -> irgend einen service anders wo rein inizieren -> evtl bei Kredit transaction -> eigenen transfer Service
 -> allen beans muss ein scope zugeteilt sein (dependency inj)
 -> evtl iban besser generieren (endlosschleife abfangen)
 -> security reworken -> Right und Customer Right rauslöschen
--> evtl set iban bei account creiren weg
--> evtl throws Exception bei getLoggedInCustomer
--> in übersicht Account -> use for Transaction setzen -> Feld beim erstellen von neuem Konto wo man setzten kann
--> evtl dont use for transactions -> für dependency injection
--> credit enttiy hinzufügen
+-> Exceptions aufpassen
 
+eher weniger:
+-> evtl dont use for transactions -> für dependency injection
+-> in übersicht Account -> use for Transaction setzen -> Feld beim erstellen von neuem Konto wo man setzten kann
 -----------> standardmäßig andere bankkontos durchsuchen wenn nicht genug für credit für dci 
 
 
