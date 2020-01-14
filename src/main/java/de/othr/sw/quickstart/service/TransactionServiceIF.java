@@ -6,6 +6,6 @@ import de.othr.sw.quickstart.entity.Transaction;
 import java.util.List;
 
 public interface TransactionServiceIF {
-    public boolean transfer(String senderIban, String receiverIban, Long amount);
+    public boolean transfer(String senderIban, String receiverIban, long amount);
     public List<Transaction> getLastTransactions(Customer customer, int number);
 }

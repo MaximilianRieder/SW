@@ -31,7 +31,7 @@ public class TransactionService implements TransactionServiceIF {
 
     @Transactional
     @Override
-    public boolean transfer(String senderIban, String receiverIban, Long amount) {
+    public boolean transfer(String senderIban, String receiverIban, long amount) {
         transferHandlerCustomer.transferMoney(senderIban, receiverIban, amount);
         return true;
     }
@@ -39,22 +39,12 @@ public class TransactionService implements TransactionServiceIF {
     @Override
     public List<Transaction> getLastTransactions(Customer customer, int number) {
         List<Account> accounts = customer.getAccounts();
-        List<Long> accountIds = new LinkedList<>();
         List<Transaction> transactions = new LinkedList<>();
         for (Account a: accounts
              ) {
-            accountIds.add(a.getId());
-        }
-        for (Long s: accountIds
-        ) {
             Pageable pageable = PageRequest.of(0, number, Sort.by("date").descending());
-            Page<Transaction> page = transactionRepository.findByReceiver_IdAndSender_Id(s,s,pageable);
+            Page<Transaction> page = transactionRepository.findByReceiver_IdOrSender_Id(a.getId(), a.getId(), pageable);
             transactions.addAll(page.getContent());
-        }
-
-        for (Transaction t: transactions
-             ) {
-            System.out.println(t.getDate());
         }
         return transactions;
     }

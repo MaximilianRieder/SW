@@ -18,10 +18,10 @@ public class TransferHandlerCustomer implements TransferHandlerIF {
     Date date;
 
     @Override
-    public boolean transferMoney(String receiverIban, String senderIban, Long amount) {
+    public boolean transferMoney(String senderIban, String receiverIban, long amount) {
         //check if ibans correct
         Optional<Account> receiverAccountO = accountRepository.findByIban(receiverIban);
-        Optional<Account> senderAccountO = accountRepository.findByIban(receiverIban);
+        Optional<Account> senderAccountO = accountRepository.findByIban(senderIban);
         if((receiverAccountO.isEmpty()) || (senderAccountO.isEmpty())) {
             return false;
         }

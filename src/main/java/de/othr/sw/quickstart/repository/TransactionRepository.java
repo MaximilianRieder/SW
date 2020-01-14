@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface TransactionRepository extends CrudRepository<Transaction, Long> {
     //Optional<Transaction> findById(String id);
-    List<Transaction> findByReceiver_Id( Long id);
-    List<Transaction> findBySender_Id(Long id);
-    Page<Transaction> findByReceiver_IdAndSender_Id(Long id1, Long id2, Pageable pageable);
+    List<Transaction> findByReceiver_Id(long id);
+    List<Transaction> findBySender_Id(long id);
+    Page<Transaction> findByReceiver_IdOrSender_Id(long id1, long id2, Pageable pageable);
 }
