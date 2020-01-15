@@ -13,9 +13,9 @@ public class Account {
     private long balance;
 //    private long creditAmount;
 //    private long interestRate;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Credit> credits;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Customer accountHolder;
 
     public void addCredit(Credit credit) {

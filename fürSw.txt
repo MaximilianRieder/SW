@@ -17,8 +17,10 @@ geht auch th:if
 
 
 to.do
+-> eingabe erzwingen (bei credit)
 -> checken dass man nur von eigenem konto aus überweisen kann
 -> checken dass nur verifizierte überweisen können
+-> checken ob zb liste empty (bankaccounts oder so) -> bei allem immer
 -> fall abfangen, dass kunde ohne account überweisen will
 -> abspeichern wie viel der Kredit gekostet hat -> mit interest rate
 -> evtl schauen ob bei account get accounts noch unmodifiable werden muss

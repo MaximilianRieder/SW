@@ -7,6 +7,7 @@ public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    //amount of money the customer got
     private long amount;
     //interest Rate in promille
     private long interestRate;
@@ -14,6 +15,7 @@ public class Credit {
     private long repaymentRate;
     //to check if there is a credit
     private boolean activeCredit;
+    //amount but with interest rate calculated in
     private long remainingAmountBack;
 
     public long getRemainingAmountBack() {

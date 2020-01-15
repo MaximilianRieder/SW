@@ -11,4 +11,6 @@ public class M26Config {
     public static final int standardRepaymentTime = 12;
     //interest Rate in Promille -> how much a customer has to pay back more for a credit (50 = 5%)
     public static final int standardInterestRate = 50;
+    // would usually be once per month but for showcase every ten seconds
+    public static final String creditRepayRate = "*/10 * * * * *";
 }
