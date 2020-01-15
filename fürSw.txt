@@ -17,6 +17,7 @@ geht auch th:if
 
 
 to.do
+-> kein negativen kredit
 -> eingabe erzwingen (bei credit)
 -> checken dass man nur von eigenem konto aus überweisen kann
 -> checken dass nur verifizierte überweisen können

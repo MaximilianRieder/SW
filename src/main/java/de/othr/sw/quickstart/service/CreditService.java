@@ -79,6 +79,10 @@ public class CreditService implements CreditServiceIF{
              ) {
             if(c.isActiveCredit()) {
                 long repaymentRate = c.getRepaymentRate();
+                //check if repayment rate is higher than remaining amount
+                if((c.getRemainingAmountBack() - repaymentRate) <= 0) {
+                    repaymentRate = c.getRemainingAmountBack();
+                }
                 if(transferHandlerCustomer.transferMoney(a.getIban(), bankIban, repaymentRate)) {
                     //repayment worked
                     if((c.getRemainingAmountBack() - repaymentRate) > 0) {
