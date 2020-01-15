@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/account/create">
+    <span th:text="${accountBalance}"/><br/>
+    <span th:text="${accountUsername}"/><br/>
+    <input type="submit" value="account create">
+</form>
+<form action="/transaction/history">
+    <div th:each="transaction : ${transactions}">
+        id:<span th:text="${transaction.id}"> </span>
+        amount: <span th:text="${transaction.amount}"> </span>
+        sender: <span th:text="${transaction.sender.iban}"> </span>
+        receiver: <span th:text="${transaction.receiver.iban}"> </span>
+    </div>
+    <input type="submit" value="transactionHistory">
+</form>
+<form action="/startPage">
+    <input type="submit" value="startpage">
+</form>
+</body>
+</html>

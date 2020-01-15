@@ -20,7 +20,7 @@ public class AccountService implements AccountServiceIF{
 
     @Transactional
     @Override
-    public void createAccount(Account account, String username) {
+    public Account createAccount(Account account, String username) {
         Customer accountHolder = customerRepository.findByUsername(username).get();
 //        Credit credit = new Credit();
 //        credit.setActiveCredit(false);
@@ -36,7 +36,7 @@ public class AccountService implements AccountServiceIF{
         accountHolder.addAccount(account);
         accountHolder = customerRepository.save(accountHolder);
         account = accountRepository.save(account);
-        return;
+        return account;
     }
 
     //create IBAN for new Account (Is no real IBAN, its just for demo purposes(no real BLZ etc.))

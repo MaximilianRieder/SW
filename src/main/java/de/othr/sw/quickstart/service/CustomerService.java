@@ -24,10 +24,10 @@ public class CustomerService implements CustomerServiceIF, UserDetailsService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public void createCustomer(Customer customer) {
+    public Customer createCustomer(Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customerRepository.save(customer);
-        return;
+        return customer;
     }
 
 

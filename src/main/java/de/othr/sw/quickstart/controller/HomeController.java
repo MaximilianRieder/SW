@@ -2,13 +2,9 @@ package de.othr.sw.quickstart.controller;
 
 import de.othr.sw.quickstart.entity.Address;
 import de.othr.sw.quickstart.entity.Customer;
-import de.othr.sw.quickstart.repository.CustomerRepository;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,13 +32,22 @@ public class HomeController {
     //für testzwecke -> "wird zur startpage"
     @RequestMapping("/startPage")
     public String goStartPage(
-            Model model
+//            Model model
     ) {
-        String username;
-        username = customerService.getLoggedInCustomer().getMainResidence().getCity();
-        model.addAttribute("username", username);
+//        String username;
+//        username = customerService.getLoggedInCustomer().getMainResidence().getCity();
+//        model.addAttribute("username", username);
         return "startPage";
     }
+
+    @RequestMapping("/accountManagement")
+    public String goAccountManagement() { return "accountManagement";}
+
+    @RequestMapping("/banking")
+    public String goBanking() { return "banking";}
+
+    @RequestMapping("/credit")
+    public String goCredit() { return "credit";}
 
     @RequestMapping("/registernew")
     public String registerNew(

@@ -19,8 +19,8 @@ import java.util.Optional;
 
 @Controller
 @Scope("session")
-@RequestMapping("/transaction")
-public class TransactionController {
+@RequestMapping("/credit")
+public class CreditController {
     @Autowired
     TransactionServiceIF transactionService;
     @Autowired
@@ -29,28 +29,23 @@ public class TransactionController {
     AccountRepository accountRepository;
     @Autowired
     CreditServiceIF creditService;
-    @RequestMapping("/transafer")
-    public String doTransaction(
+    @RequestMapping("/request")
+    public String requestCredit(
             Model model,
-            @ModelAttribute("senderIban") String senderIban,
-            @ModelAttribute("receiverIban") String receiverIban,
-            @ModelAttribute("amount") long amount
+            @ModelAttribute("amount") long amount,
+            @ModelAttribute("account") String iban
     ) {
-        transactionService.transfer(senderIban, receiverIban, amount);
+        creditService.requestCredit(iban, amount);
 //        List<Transaction> list = transactionService.getLastTransactions(customerService.getLoggedInCustomer(), 5);
+//        Optional<Account> testa = accountRepository.findByIban("DE26000000000000000004");
 //        for (Transaction t: list
-//             ) {
-//            model.addAttribute("transfereins", Long.toString(t.getAmount()));
+//        ) {
+//            for (Credit c:t.getReceiver().getCredits()
+//            ) {
+//                model.addAttribute("transfereins", Long.toString(c.getAmount()));
+//            }
 //        }
-        return "banking";
-    }
-
-    @RequestMapping("history")
-    public String showTransactions(
-            Model model
-    ) {
-        List<Transaction> transactions = transactionService.getLastTransactions(customerService.getLoggedInCustomer(), 20);
-        model.addAttribute("transactions", transactions);
-        return "accountManagement";
+        return "startPage";
     }
 }
+

@@ -34,6 +34,6 @@ public class AccountController {
             model.addAttribute("accountBalance", a.getId());
         }
 
-        return "startPage";
+        return "accountManagement";
     }
 }

@@ -39,6 +39,8 @@ public class TransactionService implements TransactionServiceIF {
     @Override
     public List<Transaction> getLastTransactions(Customer customer, int number) {
         List<Account> accounts = customer.getAccounts();
+        //reduce the number in relation to number of accounts, to avoid too much load
+        number = (number / accounts.size());
         List<Transaction> transactions = new LinkedList<>();
         for (Account a: accounts
              ) {
