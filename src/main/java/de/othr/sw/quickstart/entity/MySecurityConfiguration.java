@@ -25,7 +25,7 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
         return securityUtilities.passwordEncoder();
     }
     private static final String[] ALLOW_ACCESS_WITHOUT_AUTHENTICATION = {
-            "/css/**", "/image/**", "/fonts/**", "/", "/login", "/forgotPassword", "/register", "/registernew", "testSeite"};
+            "/css/**", "/image/**", "/fonts/**", "/", "/login", "/forgotPassword", "/register", "/registernew", "/restapi/transaction"};
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,6 +46,7 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .rememberMe();
+        http.csrf().disable();
     }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

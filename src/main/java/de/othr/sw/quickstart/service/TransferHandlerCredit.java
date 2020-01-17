@@ -23,12 +23,12 @@ public class TransferHandlerCredit implements TransferHandlerIF {
     Date date;
 
     @Override
-    public boolean transferMoney(String senderIban, String receiverIban, long amount) {
+    public Optional<Transaction> transferMoney(String senderIban, String receiverIban, long amount) {
         //check if ibans correct
         Optional<Account> receiverAccountO = accountRepository.findByIban(receiverIban);
         Optional<Account> senderAccountO = accountRepository.findByIban(senderIban);
         if((receiverAccountO.isEmpty()) || (senderAccountO.isEmpty())) {
-            return false;
+            return Optional.empty();
         }
         Account receiverAccount = receiverAccountO.get();
         Account senderAccount = senderAccountO.get();
@@ -53,8 +53,9 @@ public class TransferHandlerCredit implements TransferHandlerIF {
             transaction.setSender(senderAccount);
             transaction.setReceiver(receiverAccount);
             transaction.setStatus(TransactionStatus.FAILURE);
-            transactionRepository.save(transaction);
-            return false;
+            transaction = transactionRepository.save(transaction);
+            Optional<Transaction> transO = Optional.of(transaction);
+            return transO;
         } else {
             //transaction worked
             //set new balance
@@ -88,8 +89,9 @@ public class TransferHandlerCredit implements TransferHandlerIF {
             transaction.setSender(senderAccount);
             transaction.setReceiver(receiverAccount);
             transaction.setStatus(TransactionStatus.SUCCESS);
-            transactionRepository.save(transaction);
-            return true;
+            transaction = transactionRepository.save(transaction);
+            Optional<Transaction> transO = Optional.of(transaction);
+            return transO;
         }
     }
 }

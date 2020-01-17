@@ -3,6 +3,8 @@ package de.othr.sw.quickstart.service;
 import de.othr.sw.quickstart.entity.Account;
 
 import de.othr.sw.quickstart.entity.Credit;
+import de.othr.sw.quickstart.entity.Transaction;
+import de.othr.sw.quickstart.entity.TransactionStatus;
 import de.othr.sw.quickstart.helpclass.M26Config;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CreditRepository;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CreditService implements CreditServiceIF{
@@ -38,7 +41,6 @@ public class CreditService implements CreditServiceIF{
     @Transactional
     @Override
     public boolean requestCredit(String receiverIban, long amount) {
-        //check if there is already a credit on the account (only one credit per account allowed)
         if (accountRepository.findByIban(receiverIban).isEmpty()) {
             return false;
         }
@@ -47,8 +49,13 @@ public class CreditService implements CreditServiceIF{
         //for each mit abbruch falls funktioniert hat
         for (Account a: bAccounts
              ) {
-            if(transferHandlerCredit.transferMoney(a.getIban(), receiverIban, amount)) {
-                return true;
+            Optional<Transaction> transactionO = transferHandlerCredit.transferMoney(a.getIban(), receiverIban, amount);
+            if(transactionO.isPresent()) {
+                if (transactionO.get().getStatus() == TransactionStatus.SUCCESS){
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
@@ -62,6 +69,7 @@ public class CreditService implements CreditServiceIF{
         Iterable<Account> accountsIterable = accountRepository.findAll();
         for (Account a : accountsIterable
              ) {
+            //skip bank account
             if (!(a.getAccountHolder().getUsername().equals(M26Config.bankName))){
                 repayCreditRate(a);
             } else {
@@ -83,7 +91,12 @@ public class CreditService implements CreditServiceIF{
                 if((c.getRemainingAmountBack() - repaymentRate) <= 0) {
                     repaymentRate = c.getRemainingAmountBack();
                 }
-                if(transferHandlerCustomer.transferMoney(a.getIban(), bankIban, repaymentRate)) {
+                Optional<Transaction> transO = transferHandlerCustomer.transferMoney(a.getIban(), bankIban, repaymentRate);
+                //throw exception
+                if(transO.isEmpty())
+                    return;
+                Transaction transaction = transO.get();
+                if(transaction.getStatus() == TransactionStatus.SUCCESS) {
                     //repayment worked
                     if((c.getRemainingAmountBack() - repaymentRate) > 0) {
                         c.setRemainingAmountBack(c.getRemainingAmountBack() - repaymentRate);

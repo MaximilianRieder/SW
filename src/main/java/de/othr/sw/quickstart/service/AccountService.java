@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class AccountService implements AccountServiceIF{
     @Autowired
@@ -71,9 +74,24 @@ public class AccountService implements AccountServiceIF{
         return uniqueID;
     }
 
-    //löschen
+    //besser prüfen Optional auch drunter
     @Override
     public Account getAccountByIban(String iban) {
         return accountRepository.findByIban(iban).get();
+    }
+
+    @Override
+    public boolean verifyAccount(String iban, String customerKey) {
+        Optional<Account> accountO = accountRepository.findByIban(iban);
+        if(accountO.isEmpty()) {
+            return false;
+        } else {
+            Account account = accountO.get();
+            if (account.getAccountHolder().getCustomerKey().equals(UUID.fromString(customerKey))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }

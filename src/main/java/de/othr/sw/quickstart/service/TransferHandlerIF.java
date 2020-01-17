@@ -1,5 +1,9 @@
 package de.othr.sw.quickstart.service;
 
+import de.othr.sw.quickstart.entity.Transaction;
+
+import java.util.Optional;
+
 public interface TransferHandlerIF {
-    public boolean transferMoney(String senderIban, String receiverIban, long amount);
+    public Optional<Transaction> transferMoney(String senderIban, String receiverIban, long amount);
 }

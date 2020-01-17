@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Qualifier("labresources")
@@ -26,6 +27,9 @@ public class CustomerService implements CustomerServiceIF, UserDetailsService {
     @Override
     public Customer createCustomer(Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+        UUID uuid = UUID.randomUUID();
+        System.out.println(uuid.toString());
+        customer.setCustomerKey(uuid);
         customerRepository.save(customer);
         return customer;
     }

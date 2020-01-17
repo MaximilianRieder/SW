@@ -70,3 +70,5 @@ kein timestamp
 account rückzahlungsrate
 evtl kredit entity
 added repayment rate
+auch in dtos tid -> ID
+key bei customer

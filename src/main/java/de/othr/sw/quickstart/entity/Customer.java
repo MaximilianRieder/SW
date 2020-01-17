@@ -16,6 +16,7 @@ public class Customer implements UserDetails {
     private String lastName;
     private String password;
     private Address mainResidence;
+    private UUID customerKey;
     //@ElementCollection
     @OneToMany(mappedBy = "accountHolder")
     private List<Account> accounts = new LinkedList<>();
@@ -43,6 +44,16 @@ public class Customer implements UserDetails {
         account.setAccountHolder(null);
     }
     //getter setter
+
+
+    public UUID getCustomerKey() {
+        return customerKey;
+    }
+
+    public void setCustomerKey(UUID customerKey) {
+        this.customerKey = customerKey;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
