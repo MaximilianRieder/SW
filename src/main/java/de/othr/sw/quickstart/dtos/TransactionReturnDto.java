@@ -3,7 +3,7 @@ package de.othr.sw.quickstart.dtos;
 public class TransactionReturnDto {
     long id;
     boolean status;
-    TransactionMessage message;
+    String message;
 
     public long getId() {
         return id;
@@ -21,11 +21,11 @@ public class TransactionReturnDto {
         this.status = status;
     }
 
-    public TransactionMessage getMessage() {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(TransactionMessage message) {
+    public void setMessage(String message) {
         this.message = message;
     }
 }

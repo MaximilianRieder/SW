@@ -1,10 +1,8 @@
 package de.othr.sw.quickstart.service;
 
-import de.othr.sw.quickstart.dtos.TransactionMessage;
 import de.othr.sw.quickstart.entity.Account;
 import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.repository.AccountRepository;
-import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.data.domain.Page;
 
 import org.springframework.data.domain.PageRequest;

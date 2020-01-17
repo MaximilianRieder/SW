@@ -1,6 +1,5 @@
 package de.othr.sw.quickstart.service;
 
-import de.othr.sw.quickstart.dtos.TransactionMessage;
 import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.entity.Transaction;
 

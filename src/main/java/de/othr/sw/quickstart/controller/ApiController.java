@@ -1,6 +1,5 @@
 package de.othr.sw.quickstart.controller;
 
-import de.othr.sw.quickstart.dtos.TransactionMessage;
 import de.othr.sw.quickstart.dtos.TransactionRequestDto;
 import de.othr.sw.quickstart.dtos.TransactionReturnDto;
 import de.othr.sw.quickstart.entity.Transaction;
@@ -31,7 +30,7 @@ public class ApiController {
         //check if key matches with account and if UUID has right length
         if(requestDto.getSenderKey().length() != 36 || (!(accountService.verifyAccount(requestDto.getSenderIban(), requestDto.getSenderKey())))) {
             returnDto.setId(-1);
-            returnDto.setMessage(TransactionMessage.FAILURE_IBAN);
+            returnDto.setMessage("authorisation");
             returnDto.setStatus(false);
             return  returnDto;
         }
@@ -40,16 +39,16 @@ public class ApiController {
         Optional<Transaction> transO = transactionService.transfer(requestDto.getSenderIban(), requestDto.getReceiverIban(), requestDto.getAmount());
         if(transO.isEmpty()) {
             returnDto.setId(-1);
-            returnDto.setMessage(TransactionMessage.FAILURE_IBAN);
+            returnDto.setMessage("iban");
             returnDto.setStatus(false);
         } else {
             if(transO.get().getStatus() == TransactionStatus.SUCCESS) {
                 returnDto.setId(transO.get().getId());
-                returnDto.setMessage(TransactionMessage.SUCCESS);
+                returnDto.setMessage("success");
                 returnDto.setStatus(true);
             } else {
                 returnDto.setId(transO.get().getId());
-                returnDto.setMessage(TransactionMessage.FAILURE_ACCOUNT_BALANCE);
+                returnDto.setMessage("account balance");
                 returnDto.setStatus(false);
             }
         }
