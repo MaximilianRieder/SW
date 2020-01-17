@@ -5,10 +5,12 @@ import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CustomerRepository;
+import org.hibernate.validator.constraints.EAN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -78,6 +80,11 @@ public class AccountService implements AccountServiceIF{
     @Override
     public Account getAccountByIban(String iban) {
         return accountRepository.findByIban(iban).get();
+    }
+
+    @Override
+    public List<Account> getAccountsByCustomer(Customer customer) {
+        return accountRepository.findAccountsByAccountHolder_Id(customer.getId());
     }
 
     @Override

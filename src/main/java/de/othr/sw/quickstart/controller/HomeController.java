@@ -2,6 +2,8 @@ package de.othr.sw.quickstart.controller;
 
 import de.othr.sw.quickstart.entity.Address;
 import de.othr.sw.quickstart.entity.Customer;
+import de.othr.sw.quickstart.service.AccountService;
+import de.othr.sw.quickstart.service.AccountServiceIF;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +18,8 @@ public class HomeController {
 
     @Autowired
     private CustomerServiceIF customerService;
+    @Autowired
+    private AccountServiceIF accountService;
 
 
     @RequestMapping("/")
@@ -29,14 +33,9 @@ public class HomeController {
     @RequestMapping("/login")
     public String goLogin() { return "login";}
 
-    //für testzwecke -> "wird zur startpage"
     @RequestMapping("/startPage")
     public String goStartPage(
-//            Model model
     ) {
-//        String username;
-//        username = customerService.getLoggedInCustomer().getMainResidence().getCity();
-//        model.addAttribute("username", username);
         return "startPage";
     }
 
@@ -48,6 +47,22 @@ public class HomeController {
 
     @RequestMapping("/credit")
     public String goCredit() { return "credit";}
+
+    @RequestMapping("/showKey")
+    public String showKey(
+            Model model
+    ) {
+        model.addAttribute("customerKey", customerService.getLoggedInCustomer().getCustomerKey());
+        return "startPage";
+    }
+
+    @RequestMapping("/showAccounts")
+    public String showAccounts(
+            Model model
+    ) {
+        model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
+        return "startPage";
+    }
 
     @RequestMapping("/registernew")
     public String registerNew(

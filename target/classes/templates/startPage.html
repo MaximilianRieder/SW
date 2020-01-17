@@ -17,5 +17,21 @@
 <form action="/credit">
     <input type="submit" value="credit">
 </form>
+<form action="/showKey">
+    customerKey:
+    <span th:text="${customerKey}"></span>
+    <input type="submit" value="show Key">
+</form>
+<form action="/showAccounts">
+    <div th:each="account : ${accounts}">
+        iban:<span th:text="${account.iban}"> </span>
+        balance: <span th:text="${account.balance}"> </span>
+        <div th:each="credit : ${account.credits}">
+            got credit with amount:<span th:text="${credit.amount}"> </span>
+            still has to pay: <span th:text="${credit.remainingAmountBack}"> </span>
+        </div>
+    </div>
+    <input type="submit" value="show accounts">
+</form>
 </body>
 </html>
