@@ -3,7 +3,9 @@ package de.othr.sw.quickstart.controller;
 import de.othr.sw.quickstart.entity.Account;
 import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Transaction;
+import de.othr.sw.quickstart.entity.TransactionStatus;
 import de.othr.sw.quickstart.repository.AccountRepository;
+import de.othr.sw.quickstart.service.AccountServiceIF;
 import de.othr.sw.quickstart.service.CreditServiceIF;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import de.othr.sw.quickstart.service.TransactionServiceIF;
@@ -26,9 +28,7 @@ public class TransactionController {
     @Autowired
     CustomerServiceIF customerService;
     @Autowired
-    AccountRepository accountRepository;
-    @Autowired
-    CreditServiceIF creditService;
+    AccountServiceIF accountService;
 
     @RequestMapping("/transafer")
     public String doTransaction(
@@ -37,12 +37,29 @@ public class TransactionController {
             @ModelAttribute("receiverIban") String receiverIban,
             @ModelAttribute("amount") long amount
     ) {
-        transactionService.transfer(senderIban, receiverIban, amount);
-//        List<Transaction> list = transactionService.getLastTransactions(customerService.getLoggedInCustomer(), 5);
-//        for (Transaction t: list
-//             ) {
-//            model.addAttribute("transfereins", Long.toString(t.getAmount()));
-//        }
+        Optional<Transaction> transO;
+        //check if sender iban is a correct iban
+        if(accountService.getAccountByIban(senderIban).isPresent()) {
+            //check if sender(logged in) is owner of account
+            if(customerService.getLoggedInCustomer().getUsername().equals(accountService.getAccountByIban(senderIban).get().getAccountHolder().getUsername())){
+                //make transaction and check if worked
+                transO = transactionService.transfer(senderIban, receiverIban, amount);
+                if(transO.isEmpty()) {
+                    model.addAttribute("transactionStatus","false receiver iban");
+                } else {
+                    if(transO.get().getStatus() == TransactionStatus.SUCCESS) {
+                        model.addAttribute("transactionStatus","success");
+                    } else {
+                        model.addAttribute("transactionStatus","not enough money in account");
+                    }
+                }
+            } else {
+                model.addAttribute("transactionStatus","choose one of your own accounts");
+            }
+        } else {
+            model.addAttribute("transactionStatus","choose a correct iban for your transaction");
+        }
+        model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
         return "banking";
     }
 

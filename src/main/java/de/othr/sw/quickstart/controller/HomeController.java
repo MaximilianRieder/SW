@@ -12,6 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Controller
 @Scope("session")
 public class HomeController {
@@ -34,16 +38,15 @@ public class HomeController {
     public String goLogin() { return "login";}
 
     @RequestMapping("/startPage")
-    public String goStartPage(
-    ) {
-        return "startPage";
-    }
+    public String goStartPage() { return "startPage"; }
 
     @RequestMapping("/accountManagement")
     public String goAccountManagement() { return "accountManagement";}
 
     @RequestMapping("/banking")
-    public String goBanking() { return "banking";}
+    public String goBanking(Model model) {
+        model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
+        return "banking";}
 
     @RequestMapping("/credit")
     public String goCredit() { return "credit";}
@@ -75,6 +78,7 @@ public class HomeController {
             @ModelAttribute("zip") String zip,
             @ModelAttribute("city") String city,
             @ModelAttribute("country") String country,
+            @ModelAttribute("birthday") String birthday,
             Model model
     ) {
         //check if username is used already
@@ -97,6 +101,16 @@ public class HomeController {
             customer.setUsername(username);
             customer.setAccounts(null);
             customer.setMainResidence(address);
+            //parse date to date
+            Date date;
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                date = formatter.parse(birthday);
+            } catch (ParseException e) {
+                model.addAttribute("falseDate", "you have to use the right format");
+                return "register";
+            }
+            customer.setBirthday(date);
             customerService.createCustomer(customer);
             return "login";
         }

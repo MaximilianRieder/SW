@@ -16,6 +16,8 @@ bugs:
 -> bug bei accounts anzeigen ohne account
 
 wichtig:
+-> so wie joni 
+-> alles an dennis schicken etc
 -> mysql datenbank
 -> überprüfen ob customer schufa id angegeben hat vor transactionen etc
 -> wie fehlgeschlagene rest requests behandeln?
@@ -24,6 +26,7 @@ wichtig:
 -> geburtsdatum
 -> warum Post weggelöscht?
 -> was ist unterschied zwischen post und get funktionen
+-> security checken ob alles stimmt
 
 
 to.do

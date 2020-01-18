@@ -8,6 +8,9 @@ public class M26Config {
     //choose true to switch off schufa requests -> false to turn on
     public static final boolean testWithouthSchufa = true;
 
+    // ID from dream schufa for authorisation
+    public static final int schufaId = 0;
+
     //name of bank as user
     public static final String bankName = "m26";
     //in months

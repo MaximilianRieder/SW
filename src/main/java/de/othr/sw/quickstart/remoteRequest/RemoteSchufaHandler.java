@@ -5,6 +5,7 @@ import de.othr.sw.quickstart.dtos.Art;
 import de.othr.sw.quickstart.dtos.RiskDto;
 import de.othr.sw.quickstart.dtos.RiskResponseDto;
 import de.othr.sw.quickstart.entity.Customer;
+import de.othr.sw.quickstart.helpclass.M26Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,7 +15,7 @@ public class RemoteSchufaHandler implements RemoteSchufaHandlerIF {
 
     @Override
     public RiskResponseDto getRiskEstimation(Customer customer, long amount) {
-        RiskDto riskDto = new RiskDto(customer.getSchufaId(), customer.getFirstName() + " " + customer.getLastName(), customer.getBirthday().toString(), (int)amount);
+        RiskDto riskDto = new RiskDto(M26Config.schufaId, customer.getFirstName() + " " + customer.getLastName(), customer.getBirthday().toString(), (int)amount);
         RiskResponseDto riskResponseDto = restClient.postForObject("", riskDto, RiskResponseDto.class);
         return riskResponseDto;
     }

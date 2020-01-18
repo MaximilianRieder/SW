@@ -36,15 +36,7 @@ public class CreditController {
             @ModelAttribute("account") String iban
     ) {
         creditService.requestCredit(iban, amount);
-//        List<Transaction> list = transactionService.getLastTransactions(customerService.getLoggedInCustomer(), 5);
-//        Optional<Account> testa = accountRepository.findByIban("DE26000000000000000004");
-//        for (Transaction t: list
-//        ) {
-//            for (Credit c:t.getReceiver().getCredits()
-//            ) {
-//                model.addAttribute("transfereins", Long.toString(c.getAmount()));
-//            }
-//        }
+
         return "startPage";
     }
 }

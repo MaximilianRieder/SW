@@ -27,8 +27,6 @@ public class AccountController {
         account.setBalance(500000);
         account.setAccountHolder(null);
         accountService.createAccount(account, customerService.getLoggedInCustomer().getUsername());
-        //model.addAttribute("accountBalance", customerService.getLoggedInCustomer().getAccounts().get(0).getBalance());
-        //model.addAttribute("accountUsername", customerService.getLoggedInCustomer().getAccounts().get(0).getIban());
         for (Account a:customerService.getLoggedInCustomer().getAccounts()) {
             model.addAttribute("accountUsername", a.getIban());
             model.addAttribute("accountBalance", a.getId());

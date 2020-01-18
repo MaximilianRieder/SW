@@ -78,8 +78,8 @@ public class AccountService implements AccountServiceIF{
 
     //besser prüfen Optional auch drunter
     @Override
-    public Account getAccountByIban(String iban) {
-        return accountRepository.findByIban(iban).get();
+    public Optional<Account> getAccountByIban(String iban) {
+        return accountRepository.findByIban(iban);
     }
 
     @Override
