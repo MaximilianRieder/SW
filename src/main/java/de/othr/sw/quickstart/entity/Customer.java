@@ -17,6 +17,9 @@ public class Customer implements UserDetails {
     private String password;
     private Address mainResidence;
     private UUID customerKey;
+    //needed for schufa
+    private int schufaId;
+    private Date birthday;
     //@ElementCollection
     @OneToMany(mappedBy = "accountHolder")
     private List<Account> accounts = new LinkedList<>();
@@ -46,12 +49,28 @@ public class Customer implements UserDetails {
     //getter setter
 
 
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
     public UUID getCustomerKey() {
         return customerKey;
     }
 
     public void setCustomerKey(UUID customerKey) {
         this.customerKey = customerKey;
+    }
+
+    public int getSchufaId() {
+        return schufaId;
+    }
+
+    public void setSchufaId(int schufaId) {
+        this.schufaId = schufaId;
     }
 
     public void setUsername(String username) {

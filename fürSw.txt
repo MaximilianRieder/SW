@@ -11,12 +11,25 @@ ${session.wieesheißt.name == 'hans'}
 
 geht auch th:if
 
+bugs:
+-> bug bei credit ohne account
+-> bug bei accounts anzeigen ohne account
 
+wichtig:
+-> mysql datenbank
+-> überprüfen ob customer schufa id angegeben hat vor transactionen etc
+-> wie fehlgeschlagene rest requests behandeln?
+-> dennis id hinzufügen
+-> @Configuration bei factory
+-> geburtsdatum
 -> warum Post weggelöscht?
 -> was ist unterschied zwischen post und get funktionen
 
 
 to.do
+-> dtos privat? getter/setter?
+-> konstruktoren?
+-> löschen von account evtl hinzufügen
 -> kein negativen kredit
 -> eingabe erzwingen (bei credit)
 -> checken dass man nur von eigenem konto aus überweisen kann
@@ -59,7 +72,7 @@ falls dennis abspringt:
 mockito
 
 Merken:
-man kann nur einen Kredit pro Konto haben
+man kann umstellen auf ohne dennis
 
 
 Änderungen:

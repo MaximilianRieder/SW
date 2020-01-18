@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class M26Config {
+    //choose true to switch off schufa requests -> false to turn on
+    public static final boolean testWithouthSchufa = true;
+
     //name of bank as user
     public static final String bankName = "m26";
     //in months
