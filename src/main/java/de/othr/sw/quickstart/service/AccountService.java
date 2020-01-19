@@ -25,8 +25,8 @@ public class AccountService implements AccountServiceIF{
 
     @Transactional
     @Override
-    public Account createAccount(Account account, String username) {
-        Customer accountHolder = customerRepository.findByUsername(username).get();
+    public Account createAccount(Account account, long id) {
+        Customer accountHolder = customerRepository.findById(id).get();
 //        Credit credit = new Credit();
 //        credit.setActiveCredit(false);
 //        credit.setInterestRate(0);

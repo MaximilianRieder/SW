@@ -10,7 +10,7 @@ public class CustomerRight {
     @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
     @ManyToOne(fetch = FetchType.EAGER)
-    private Right right;
+    private Right2 right2;
 
     public int getCustomerRightID() {
         return customerRightID;
@@ -24,11 +24,11 @@ public class CustomerRight {
         this.customer = customer;
     }
 
-    public Right getRight() {
-        return right;
+    public Right2 getRight2() {
+        return right2;
     }
 
-    public void setRight(Right right) {
-        this.right = right;
+    public void setRight2(Right2 right2) {
+        this.right2 = right2;
     }
 }

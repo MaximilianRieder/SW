@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="quickstart" target="11" />
+      <module name="quickstart" target="12" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

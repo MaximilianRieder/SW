@@ -24,7 +24,7 @@
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_12">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -131,5 +131,6 @@
     <orderEntry type="library" name="Maven: org.webjars:bootstrap:4.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:jquery:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:popper.js:1.14.3" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.48" level="project" />
   </component>
 </module>

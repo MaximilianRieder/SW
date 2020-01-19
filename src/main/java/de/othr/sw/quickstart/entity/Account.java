@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Entity
+@Table(name="ACCOUNT")
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

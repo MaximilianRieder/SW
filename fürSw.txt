@@ -1,15 +1,3 @@
-Letzter Stand To do: transaction sollte eigentlich angelegt werden -> List funktioniert noch nicht 
-
-
-
-
-https://stackoverflow.com/questions/18791645/how-to-use-session-attributes-in-spring-mvc#18795626
-
-html:
-<p th:text="${session.wieesheißt}">
-${session.wieesheißt.name == 'hans'}
-
-geht auch th:if
 
 bugs:
 -> bug bei credit ohne account
@@ -18,28 +6,23 @@ bugs:
 wichtig:
 -> so wie joni 
 -> alles an dennis schicken etc
--> mysql datenbank
--> überprüfen ob customer schufa id angegeben hat vor transactionen etc
 -> wie fehlgeschlagene rest requests behandeln?
 -> dennis id hinzufügen
 -> @Configuration bei factory
--> geburtsdatum
 -> warum Post weggelöscht?
 -> was ist unterschied zwischen post und get funktionen
 -> security checken ob alles stimmt
-
+-> löschen von account evtl hinzufügen -> (dabei nur bis zum letzten -> warnung) + (sonst auf anderes konto automatisch) -> account löschen -> geht erst wenn 0 auf dem letzten konto sind
+-> es dürfen nur 99 kontos erstellt werden
+-> kein negativen kredit
+-> override hash und equals in entitys
+-> in addresse number auf long ändern
 
 to.do
 -> dtos privat? getter/setter?
 -> konstruktoren?
--> löschen von account evtl hinzufügen
--> kein negativen kredit
 -> eingabe erzwingen (bei credit)
--> checken dass man nur von eigenem konto aus überweisen kann
--> checken dass nur verifizierte überweisen können
 -> checken ob zb liste empty (bankaccounts oder so) -> bei allem immer
--> fall abfangen, dass kunde ohne account überweisen will
--> abspeichern wie viel der Kredit gekostet hat -> mit interest rate
 -> evtl schauen ob bei account get accounts noch unmodifiable werden muss
 -> orphan removal bei credit und account
 -> config klasse bei allem usen
@@ -48,31 +31,14 @@ to.do
 -> bei transactional account anlegen schauen ob des alles so funktioniert
 -> nochmal auf die ganzen optional achten -> zum beispiel in accountService bei get account || customer service get cutomer
 -> evtl Optional nochmal umschreiben
--> löschen von account evtl hinzufügen -> (dabei nur bis zum letzten -> warnung) + (sonst auf anderes konto automatisch)
--> evtl. geld von einem konto auf ein anderes
--> account löschen -> geht erst wenn 0 auf dem letzten konto sind
--> es dürfen nur 99 kontos erstellt werden
 -> standard "header" (navigationsleiste) machen und "wiederverwenden"
 -> Service Klassen müssen @Transactional sein
 -> "" nicht als gültigen user zulassen
--> override hash und equals in entitys
--> löschen für customer wegen owner
--> in addresse number auf long ändern
 -> config seite bei richtigeem einloggen ändern -> action kein html
 -> allen beans muss ein scope zugeteilt sein (dependency inj)
 -> evtl iban besser generieren (endlosschleife abfangen)
 -> security reworken -> Right und Customer Right rauslöschen
 -> Exceptions aufpassen
-
-eher weniger:
--> evtl dont use for transactions -> für dependency injection
--> in übersicht Account -> use for Transaction setzen -> Feld beim erstellen von neuem Konto wo man setzten kann
------------> standardmäßig andere bankkontos durchsuchen wenn nicht genug für credit für dci 
-
-
-
-falls dennis abspringt:
-mockito
 
 Merken:
 man kann umstellen auf ohne dennis

@@ -3,6 +3,7 @@ package de.othr.sw.quickstart.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name="CREDIT")
 public class Credit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

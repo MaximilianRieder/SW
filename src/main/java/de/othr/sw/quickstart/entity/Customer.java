@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
+@Table(name="CUSTOMER")
 public class Customer implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,7 +31,7 @@ public class Customer implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorites = new HashSet<>();
         for(CustomerRight customerRight : this.customerRights) {
-            authorites.add(new Authority(customerRight.getRight().getRightName()));
+            authorites.add(new Authority(customerRight.getRight2().getRightName()));
         }
         return authorites;
     }
