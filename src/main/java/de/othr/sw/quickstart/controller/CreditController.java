@@ -26,6 +26,8 @@ public class CreditController {
     CreditServiceIF creditService;
     @Autowired
     AccountServiceIF accountService;
+    @Autowired
+    CustomerServiceIF customerService;
 
     @RequestMapping("/request")
     public String requestCredit(
@@ -33,7 +35,8 @@ public class CreditController {
             @ModelAttribute("amount") long amount,
             @ModelAttribute("senderIban") String iban
     ) {
-        if(accountService.getAccountByIban(iban).isEmpty()) {
+        if((accountService.getAccountByIban(iban).isEmpty()) || (amount <= 0)) {
+            model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
             return "credit";
         } else {
             creditService.requestCredit(iban, amount);

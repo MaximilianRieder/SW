@@ -1,26 +1,24 @@
-
 -riskestimation nutzen (muss noch in controller)
 
 wichtig:
 -> Allen CDI-Beansder Anwendung MUSS ein fachlich und technisch sinnvoller Scopezugeteilt werden
+-> Transactionstypen (Required, Requires_NEW etc)
 -> was ist kaskadierung? -> sollte einmal verwendet werden
+-> evtl paging repos
 -> transaction history nach datum ordnen
 -> alles an dennis schicken etc
 -> wie fehlgeschlagene rest requests behandeln?
 -> dennis id hinzufügen
 -> @Configuration bei factory
--> warum Post weggelöscht?
--> was ist unterschied zwischen post und get funktionen
+-> überall post / get thymeleaf methoden hinzufügen
 -> security checken ob alles stimmt
 -> konto erstellen zuverlässig abbrechen und nachricht
--> kein negativen kredit
 -> override hash und equals in entitys
 -> in addresse number auf long ändern
 -> riskestimation nutzen (muss noch in controller)
 -> number in html in numerical
 
 to.do
--> 
 -> dtos privat? getter/setter?
 -> konstruktoren?
 -> eingabe erzwingen (bei credit)

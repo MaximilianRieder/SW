@@ -25,7 +25,6 @@ public class HomeController {
     @Autowired
     private AccountServiceIF accountService;
 
-
     @RequestMapping("/")
     public String start() {
         return "index";
