@@ -26,6 +26,10 @@ public class AccountController {
         //5000 euro start balance (500000 cent)
         account.setBalance(500000);
         account.setAccountHolder(null);
+
+        if (customerService.getLoggedInCustomer().getAccounts().size() > 10) {
+            return "accountManagement";
+        }
         accountService.createAccount(account, customerService.getLoggedInCustomer().getId());
         for (Account a:customerService.getLoggedInCustomer().getAccounts()) {
             model.addAttribute("accountUsername", a.getIban());

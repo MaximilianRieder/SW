@@ -1,6 +1,8 @@
 package de.othr.sw.quickstart.dtos;
 
-public class TransactionReturnDto {
+import java.io.Serializable;
+
+public class TransactionReturnDto implements Serializable {
     long id;
     boolean status;
     String message;

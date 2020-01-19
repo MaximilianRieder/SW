@@ -1,6 +1,8 @@
 package de.othr.sw.quickstart.dtos;
 
-public class ActivityDto {
+import java.io.Serializable;
+
+public class ActivityDto implements Serializable {
     String Name;
     Art art;
     int betrag;

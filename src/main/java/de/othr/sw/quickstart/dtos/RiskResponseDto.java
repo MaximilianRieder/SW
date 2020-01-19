@@ -1,6 +1,8 @@
 package de.othr.sw.quickstart.dtos;
 
-public class RiskResponseDto {
+import java.io.Serializable;
+
+public class RiskResponseDto implements Serializable {
     Risikostufe risikostufe;
 
     public RiskResponseDto() {

@@ -1,6 +1,8 @@
 package de.othr.sw.quickstart.dtos;
 
-public class TransactionRequestDto {
+import java.io.Serializable;
+
+public class TransactionRequestDto implements Serializable {
     String senderIban;
     String receiverIban;
     long amount;

@@ -1,6 +1,8 @@
 package de.othr.sw.quickstart.dtos;
 
-public class RiskDto {
+import java.io.Serializable;
+
+public class RiskDto implements Serializable {
     int CustomerID;
     String name;
     String geburtsdatum;
