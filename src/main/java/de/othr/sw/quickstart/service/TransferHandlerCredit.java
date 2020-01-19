@@ -9,10 +9,12 @@ import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CreditRepository;
 import de.othr.sw.quickstart.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Optional;
 
+@Transactional
 public class TransferHandlerCredit implements TransferHandlerIF {
     @Autowired
     TransactionRepository transactionRepository;

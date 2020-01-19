@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class AccountService implements AccountServiceIF{
     @Autowired
     private CustomerServiceIF customerService;
@@ -23,7 +24,6 @@ public class AccountService implements AccountServiceIF{
     @Autowired
     private CustomerRepository customerRepository;
 
-    @Transactional
     @Override
     public Account createAccount(Account account, long id) {
         Customer accountHolder = customerRepository.findById(id).get();
