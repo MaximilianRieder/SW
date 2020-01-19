@@ -33,7 +33,7 @@ public class CreditController {
     public String requestCredit(
             Model model,
             @ModelAttribute("amount") long amount,
-            @ModelAttribute("account") String iban
+            @ModelAttribute("senderIban") String iban
     ) {
         creditService.requestCredit(iban, amount);
 

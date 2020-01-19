@@ -1,7 +1,10 @@
 package de.othr.sw.quickstart.service;
 
+import de.othr.sw.quickstart.dtos.Art;
 import de.othr.sw.quickstart.entity.Account;
 import de.othr.sw.quickstart.entity.Customer;
+import de.othr.sw.quickstart.entity.TransactionStatus;
+import de.othr.sw.quickstart.remoteRequest.RemoteSchufaHandlerIF;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import org.springframework.data.domain.Page;
 
@@ -27,12 +30,33 @@ public class TransactionService implements TransactionServiceIF {
     @Autowired
     @Qualifier("TransferHandlerCustomer")
     private TransferHandlerIF transferHandlerCustomer;
+    @Autowired
+    RemoteSchufaHandlerIF remoteSchufaHandler;
 
     @Transactional
     @Override
     public Optional<Transaction> transfer(String senderIban, String receiverIban, long amount) {
         Optional<Transaction> transO = transferHandlerCustomer.transferMoney(senderIban, receiverIban, amount);
-        return transO;
+
+        //notify schufa
+        if((accountRepository.findByIban(senderIban).isEmpty()) || (accountRepository.findByIban(receiverIban).isEmpty()))
+            return transO;
+        String receiverName = accountRepository.findByIban(receiverIban).get().getAccountHolder().getFirstName() + "" + accountRepository.findByIban(receiverIban).get().getAccountHolder().getLastName();
+        String senderName = accountRepository.findByIban(senderIban).get().getAccountHolder().getFirstName() + "" + accountRepository.findByIban(senderIban).get().getAccountHolder().getLastName();
+        //check if there was a transaction
+        if (transO.isEmpty())
+            return transO;
+        //noitfy with responding status
+        if (transO.get().getStatus() == TransactionStatus.SUCCESS) {
+            remoteSchufaHandler.updateUser(receiverName, Art.ZAHLUNGSEINGANG, (int)amount);
+            remoteSchufaHandler.updateUser(senderName, Art.ZAHLUNGERFOLGREICH, (int) amount);
+            return transO;
+        } else if (transO.get().getStatus() == TransactionStatus.FAILURE) {
+            remoteSchufaHandler.updateUser(senderName, Art.ZAHLUNGABGELEHNT, (int) amount);
+            return transO;
+        } else {
+            return transO;
+        }
     }
 
     @Override

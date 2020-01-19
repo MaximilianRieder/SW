@@ -3,8 +3,11 @@ bugs:
 -> bug bei credit ohne account
 -> bug bei accounts anzeigen ohne account
 
+
+-riskestimation nutzen (muss noch in controller)
+
 wichtig:
--> so wie joni 
+-> transaction history nach datum ordnen
 -> alles an dennis schicken etc
 -> wie fehlgeschlagene rest requests behandeln?
 -> dennis id hinzufügen
@@ -17,6 +20,8 @@ wichtig:
 -> kein negativen kredit
 -> override hash und equals in entitys
 -> in addresse number auf long ändern
+-> riskestimation nutzen (muss noch in controller)
+-> number in html in numerical
 
 to.do
 -> dtos privat? getter/setter?

@@ -36,8 +36,13 @@ public class TransferHandlerCredit implements TransferHandlerIF {
         //Update Credit @ Receiver
         ///calculate final credit amount (with interest)
         long amountCred = amount + Math.round(((double) amount * ((double)M26Config.standardInterestRate / 1000)));
-        ///calculate repayment rate
+        //at least one cent income
+        if (amountCred == amount)
+            amountCred++;
+        ///calculate repayment rate (at least 1)
         long repaymentRate = Math.round((double) amountCred / M26Config.standardRepaymentTime);
+        if (repaymentRate == 0)
+            repaymentRate++;
 
         //check if enough money
         if (senderAccount.getBalance() < amount) {

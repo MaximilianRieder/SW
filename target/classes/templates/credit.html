@@ -11,6 +11,16 @@
     chose account for pay back: <input type="text" name="account"><br/>
     <input type="submit" value="credit">
 </form>
+<form th:action="@{/credit/request}" th:object="${senderIban}" th:method="get">
+    <select id="senderIban" name="senderIban">
+        <option th:each="account : ${accounts}"
+                th:value="${account.iban}"
+                th:text="${account.iban}"
+        >Options</option>
+    </select>
+    amount: <input type="number" name="amount" required><br/>
+    <input type="submit" value="request credit">
+</form>
 <form action="/startPage">
     <input type="submit" value="startpage">
 </form>
