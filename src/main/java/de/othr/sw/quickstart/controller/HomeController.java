@@ -46,8 +46,7 @@ public class HomeController {
     @RequestMapping("/banking")
     public String goBanking(Model model) {
         model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
-        return "banking";
-    }
+        return "banking";}
 
     @RequestMapping("/credit")
     public String goCredit(

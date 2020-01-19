@@ -67,6 +67,8 @@ public class TransactionController {
     public String showTransactions(
             Model model
     ) {
+        if(customerService.getLoggedInCustomer().getAccounts().isEmpty())
+            return "accountManagement";
         List<Transaction> transactions = transactionService.getLastTransactions(customerService.getLoggedInCustomer(), 20);
         model.addAttribute("transactions", transactions);
         return "accountManagement";

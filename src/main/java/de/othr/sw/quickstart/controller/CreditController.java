@@ -4,6 +4,7 @@ import de.othr.sw.quickstart.entity.Account;
 import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Transaction;
 import de.othr.sw.quickstart.repository.AccountRepository;
+import de.othr.sw.quickstart.service.AccountServiceIF;
 import de.othr.sw.quickstart.service.CreditServiceIF;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import de.othr.sw.quickstart.service.TransactionServiceIF;
@@ -22,22 +23,22 @@ import java.util.Optional;
 @RequestMapping("/credit")
 public class CreditController {
     @Autowired
-    TransactionServiceIF transactionService;
-    @Autowired
-    CustomerServiceIF customerService;
-    @Autowired
-    AccountRepository accountRepository;
-    @Autowired
     CreditServiceIF creditService;
+    @Autowired
+    AccountServiceIF accountService;
+
     @RequestMapping("/request")
     public String requestCredit(
             Model model,
             @ModelAttribute("amount") long amount,
             @ModelAttribute("senderIban") String iban
     ) {
-        creditService.requestCredit(iban, amount);
-
-        return "startPage";
+        if(accountService.getAccountByIban(iban).isEmpty()) {
+            return "credit";
+        } else {
+            creditService.requestCredit(iban, amount);
+            return "credit";
+        }
     }
 }
 
