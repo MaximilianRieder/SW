@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.EAN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -16,17 +17,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@Transactional
 @Scope("singleton")
 public class AccountService implements AccountServiceIF{
-    @Autowired
-    private CustomerServiceIF customerService;
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
     private CustomerRepository customerRepository;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Account createAccount(Account account, long id) {
         Customer accountHolder = customerRepository.findById(id).get();
         account = accountRepository.save(account);
@@ -34,8 +33,8 @@ public class AccountService implements AccountServiceIF{
         account.setCredits(null);
         account.setIban(iban);
         accountHolder.addAccount(account);
-        accountHolder = customerRepository.save(accountHolder);
-        account = accountRepository.save(account);
+        //accountHolder = customerRepository.save(accountHolder);
+        //account = accountRepository.save(account);
         return account;
     }
 

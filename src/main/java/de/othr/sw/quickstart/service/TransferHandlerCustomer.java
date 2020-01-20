@@ -7,12 +7,13 @@ import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Optional;
 
-@Transactional
+@Scope("singleton")
 public class TransferHandlerCustomer implements TransferHandlerIF {
     @Autowired
     TransactionRepository transactionRepository;
@@ -20,6 +21,7 @@ public class TransferHandlerCustomer implements TransferHandlerIF {
     AccountRepository accountRepository;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Optional<Transaction> transferMoney(String senderIban, String receiverIban, long amount) {
         Date date;
         //check if ibans correct
@@ -49,8 +51,9 @@ public class TransferHandlerCustomer implements TransferHandlerIF {
             //transaction worked
             senderAccount.setBalance(senderAccount.getBalance() - amount);
             receiverAccount.setBalance(receiverAccount.getBalance() + amount);
-            accountRepository.save(senderAccount);
-            accountRepository.save(receiverAccount);
+            /////////////////////////////////////////////
+            //accountRepository.save(senderAccount);
+            //accountRepository.save(receiverAccount);
             //create working transaction
             date = java.util.Calendar.getInstance().getTime();
             Transaction transaction = new Transaction();

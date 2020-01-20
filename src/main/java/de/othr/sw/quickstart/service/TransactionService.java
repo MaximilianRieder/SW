@@ -17,12 +17,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
-@Transactional
 @Scope("singleton")
 public class TransactionService implements TransactionServiceIF {
 
@@ -36,8 +36,8 @@ public class TransactionService implements TransactionServiceIF {
     @Autowired
     RemoteSchufaHandlerIF remoteSchufaHandler;
 
-    @Transactional
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Optional<Transaction> transfer(String senderIban, String receiverIban, long amount) {
         Optional<Transaction> transO = transferHandlerCustomer.transferMoney(senderIban, receiverIban, amount);
 
@@ -75,10 +75,10 @@ public class TransactionService implements TransactionServiceIF {
             transactions.addAll(page.getContent());
         }
         Collections.sort(transactions, new Comparator<Transaction>() {
-            public int compare(Transaction o1, Transaction o2) {
-                if (o1.getDate() == null || o2.getDate() == null)
+            public int compare(Transaction t1, Transaction t2) {
+                if (t1.getDate() == null || t2.getDate() == null)
                     return 0;
-                return o1.getDate().compareTo(o2.getDate());
+                return t1.getDate().compareTo(t2.getDate());
             }
         });
         return transactions;

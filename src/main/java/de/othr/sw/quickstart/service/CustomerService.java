@@ -11,13 +11,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@Transactional
 @Qualifier("customer")
 @Scope("singleton")
 public class CustomerService implements CustomerServiceIF, UserDetailsService {
@@ -29,6 +29,7 @@ public class CustomerService implements CustomerServiceIF, UserDetailsService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Customer createCustomer(Customer customer) {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         UUID uuid = UUID.randomUUID();

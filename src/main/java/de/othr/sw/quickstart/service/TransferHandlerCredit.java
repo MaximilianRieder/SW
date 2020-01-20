@@ -9,12 +9,14 @@ import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CreditRepository;
 import de.othr.sw.quickstart.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.Optional;
 
-@Transactional
+@Scope("singleton")
 public class TransferHandlerCredit implements TransferHandlerIF {
     @Autowired
     TransactionRepository transactionRepository;
@@ -22,10 +24,11 @@ public class TransferHandlerCredit implements TransferHandlerIF {
     AccountRepository accountRepository;
     @Autowired
     CreditRepository creditRepository;
-    Date date;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Optional<Transaction> transferMoney(String senderIban, String receiverIban, long amount) {
+        Date date;
         //check if ibans correct
         Optional<Account> receiverAccountO = accountRepository.findByIban(receiverIban);
         Optional<Account> senderAccountO = accountRepository.findByIban(senderIban);
@@ -81,9 +84,10 @@ public class TransferHandlerCredit implements TransferHandlerIF {
             //set credit
             receiverAccount.addCredit(credit);
 
+            //////////////////////////////////////////
             //update accounts
-            accountRepository.save(senderAccount);
-            accountRepository.save(receiverAccount);
+            //accountRepository.save(senderAccount);
+            //accountRepository.save(receiverAccount);
 
             //create working transaction
             date = java.util.Calendar.getInstance().getTime();

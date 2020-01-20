@@ -45,7 +45,7 @@ public class CreditController {
             model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
             return "credit";
         }
-        Risikostufe risikostufe = creditService.getRisikoStufe(iban, amount);
+        /*Risikostufe risikostufe = creditService.getRisikoStufe(iban, amount);
         if(risikostufe == null) {
             model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
             return "credit";
@@ -68,7 +68,8 @@ public class CreditController {
                 break;
             default:
                 model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
-        }
+        }*/
+        creditService.requestCredit(iban, amount);
         return "credit";
     }
 }

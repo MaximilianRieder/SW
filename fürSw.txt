@@ -1,50 +1,39 @@
 -riskestimation nutzen (muss noch in controller)
 
 wichtig:
--> Allen CDI-Beansder Anwendung MUSS ein fachlich und technisch sinnvoller Scopezugeteilt werden
--> Transactionstypen (Required, Requires_NEW etc)
+-> creditservice -> saves weg + cascadierung -> safe bei credit handler customer // credit raus
+//-> riskestimation nutzen (muss noch in controller)
+//-> Allen CDI-Beansder Anwendung MUSS ein fachlich und technisch sinnvoller Scopezugeteilt werden
+//-> scopes
+//-> Transactionstypen (Required, Requires_NEW etc)
 -> was ist kaskadierung? -> sollte einmal verwendet werden
--> evtl paging repos
--> transaction history nach datum ordnen
--> alles an dennis schicken etc
+//-> evtl paging repos
+//-> alles an dennis schicken etc
 -> wie fehlgeschlagene rest requests behandeln?
--> dennis id hinzufügen
--> @Configuration bei factory
--> überall post / get thymeleaf methoden hinzufügen
--> security checken ob alles stimmt
+//-> dennis id hinzufügen
+//-> @Configuration bei factory
 -> konto erstellen zuverlässig abbrechen und nachricht
 -> override hash und equals in entitys
--> in addresse number auf long ändern
--> riskestimation nutzen (muss noch in controller)
+//-> in addresse number auf long ändern
 -> number in html in numerical
-
-to.do
--> dtos privat? getter/setter?
--> konstruktoren?
--> eingabe erzwingen (bei credit)
--> checken ob zb liste empty (bankaccounts oder so) -> bei allem immer
--> evtl schauen ob bei account get accounts noch unmodifiable werden muss
--> orphan removal bei credit und account
--> config klasse bei allem usen
--> Kommentare schreiben
--> wegen long nochmal schauen -> muss man kasten oder anders deklasieren 0L
--> bei transactional account anlegen schauen ob des alles so funktioniert
--> nochmal auf die ganzen optional achten -> zum beispiel in accountService bei get account || customer service get cutomer
--> evtl Optional nochmal umschreiben
+-> mehr geld am anfang
+-> überall post / get thymeleaf methoden hinzufügen
+//-> security checken ob alles stimmt
 -> standard "header" (navigationsleiste) machen und "wiederverwenden"
--> Service Klassen müssen @Transactional sein
 -> "" nicht als gültigen user zulassen
--> config seite bei richtigeem einloggen ändern -> action kein html
--> allen beans muss ein scope zugeteilt sein (dependency inj)
--> evtl iban besser generieren (endlosschleife abfangen)
 -> security reworken -> Right und Customer Right rauslöschen
 -> Exceptions aufpassen
 
-eher nicht:
-> löschen von account evtl hinzufügen -> (dabei nur bis zum letzten -> warnung) + (sonst auf anderes konto automatisch) -> account löschen -> geht erst wenn 0 auf dem letzten konto sind
+to.do
+//-> checken ob zb liste empty (bankaccounts oder so) -> bei allem immer
+-> nochmal auf die ganzen optional achten -> zum beispiel in accountService bei get account || customer service get cutomer
+-> evtl Optional nochmal umschreiben
+
+
 
 Merken:
 man kann umstellen auf ohne dennis
+muss nichts löschen, da ich alle daten behalten möchte (rechtlich gesehen)
 
 
 Änderungen:
@@ -57,3 +46,6 @@ evtl kredit entity
 added repayment rate
 auch in dtos tid -> ID
 key bei customer
+
+
+

@@ -3,7 +3,7 @@ package de.othr.sw.quickstart.helpclass;
 import org.springframework.context.annotation.Configuration;
 
 
-@Configuration
+
 public class M26Config {
     //choose true to switch off schufa requests -> false to turn on
     public static final boolean testWithouthSchufa = true;

@@ -12,20 +12,13 @@ public class Account {
     private long id;
     private String iban;
     private long balance;
-//    private long creditAmount;
-//    private long interestRate;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     private List<Credit> credits;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     private Customer accountHolder;
 
     public void addCredit(Credit credit) {
         credits.add(credit);
-    }
-
-    public void removeAccount(Credit credit) {
-        credits.add(credit);
-
     }
 
     public long getId() {
@@ -55,22 +48,6 @@ public class Account {
     public void setBalance(long balance) {
         this.balance = balance;
     }
-
-//    public long getCreditAmount() {
-//        return creditAmount;
-//    }
-//
-//    public void setCreditAmount(long creditAmount) {
-//        this.creditAmount = creditAmount;
-//    }
-//
-//    public long getInterestRate() {
-//        return interestRate;
-//    }
-//
-//    public void setInterestRate(long interestRate) {
-//        this.interestRate = interestRate;
-//    }
 
     public Customer getAccountHolder() {
         return accountHolder;

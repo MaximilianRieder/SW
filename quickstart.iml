@@ -132,5 +132,6 @@
     <orderEntry type="library" name="Maven: org.webjars:jquery:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:popper.js:1.14.3" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.48" level="project" />
+    <orderEntry type="library" name="Maven: org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.4.RELEASE" level="project" />
   </component>
 </module>

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
@@ -22,7 +23,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional
 @Scope("singleton")
 public class CreditService implements CreditServiceIF{
 
@@ -52,8 +52,8 @@ public class CreditService implements CreditServiceIF{
         return risikostufe;
     }
 
-    @Transactional
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public boolean requestCredit(String receiverIban, long amount) {
         if (accountRepository.findByIban(receiverIban).isEmpty()) {
             return false;
@@ -98,6 +98,7 @@ public class CreditService implements CreditServiceIF{
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void repayCreditRate(Account a) {
         //send money to first account of bank m26
         String bankIban = accountRepository.findByAccountHolder_Username(M26Config.bankName).get(0).getIban();
