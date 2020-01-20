@@ -1,8 +1,12 @@
 package de.othr.sw.quickstart.controller;
 
+import de.othr.sw.quickstart.dtos.Risikostufe;
+import de.othr.sw.quickstart.dtos.RiskDto;
+import de.othr.sw.quickstart.dtos.RiskResponseDto;
 import de.othr.sw.quickstart.entity.Account;
 import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Transaction;
+import de.othr.sw.quickstart.remoteRequest.RemoteSchufaHandlerIF;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.service.AccountServiceIF;
 import de.othr.sw.quickstart.service.CreditServiceIF;
@@ -28,6 +32,8 @@ public class CreditController {
     AccountServiceIF accountService;
     @Autowired
     CustomerServiceIF customerService;
+    @Autowired
+    RemoteSchufaHandlerIF remoteSchufaHandler;
 
     @RequestMapping("/request")
     public String requestCredit(
@@ -38,10 +44,32 @@ public class CreditController {
         if((accountService.getAccountByIban(iban).isEmpty()) || (amount <= 0)) {
             model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
             return "credit";
-        } else {
-            creditService.requestCredit(iban, amount);
+        }
+        Risikostufe risikostufe = creditService.getRisikoStufe(iban, amount);
+        if(risikostufe == null) {
+            model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
             return "credit";
         }
+
+        switch (risikostufe) {
+            case EMBARGO:
+                model.addAttribute("riskEstimation", "Denied, because of schufa estimation: embargo");
+                break;
+            case HOHESRISIKO:
+                model.addAttribute("riskEstimation", "Denied, because of schufa estimation: high risk");
+                break;
+            case KEINRISIKO:
+                creditService.requestCredit(iban, amount);
+                model.addAttribute("riskEstimation", "Accepted, because of schufa estimation: no risk");
+                break;
+            case MITTLERESRISIKO:
+                creditService.requestCredit(iban, amount);
+                model.addAttribute("riskEstimation", "Accepted, because of schufa estimation: medium risk");
+                break;
+            default:
+                model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
+        }
+        return "credit";
     }
 }
 

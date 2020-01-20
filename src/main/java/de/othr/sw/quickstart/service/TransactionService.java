@@ -72,6 +72,13 @@ public class TransactionService implements TransactionServiceIF {
             Page<Transaction> page = transactionRepository.findByReceiver_IdOrSender_Id(a.getId(), a.getId(), pageable);
             transactions.addAll(page.getContent());
         }
+        Collections.sort(transactions, new Comparator<Transaction>() {
+            public int compare(Transaction o1, Transaction o2) {
+                if (o1.getDate() == null || o2.getDate() == null)
+                    return 0;
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
         return transactions;
     }
 }

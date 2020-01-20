@@ -114,6 +114,7 @@ public class HomeController {
                 model.addAttribute("falseDate", "you have to use the right format");
                 return "register";
             }
+            System.out.println(date.toString());
             customer.setBirthday(date);
             customerService.createCustomer(customer);
             return "login";
