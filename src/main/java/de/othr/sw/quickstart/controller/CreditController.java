@@ -41,11 +41,12 @@ public class CreditController {
             @ModelAttribute("amount") long amount,
             @ModelAttribute("senderIban") String iban
     ) {
+        model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
         if((accountService.getAccountByIban(iban).isEmpty()) || (amount <= 0)) {
-            model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
             return "credit";
         }
-        /*Risikostufe risikostufe = creditService.getRisikoStufe(iban, amount);
+        Risikostufe risikostufe = creditService.getRisikoStufe(iban, amount);
+        System.out.println(risikostufe);
         if(risikostufe == null) {
             model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
             return "credit";
@@ -68,8 +69,8 @@ public class CreditController {
                 break;
             default:
                 model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
-        }*/
-        creditService.requestCredit(iban, amount);
+        }
+        model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
         return "credit";
     }
 }
