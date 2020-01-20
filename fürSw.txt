@@ -1,18 +1,19 @@
--riskestimation nutzen (muss noch in controller)
+//-riskestimation nutzen (muss noch in controller)
 
 wichtig:
--> creditservice -> saves weg + cascadierung -> safe bei credit handler customer // credit raus
+//-> bei account accountHolder cascade? und umgekehrt?
+-> safe bei credit handler customer // credit raus
 //-> riskestimation nutzen (muss noch in controller)
 //-> Allen CDI-Beansder Anwendung MUSS ein fachlich und technisch sinnvoller Scopezugeteilt werden
 //-> scopes
 //-> Transactionstypen (Required, Requires_NEW etc)
--> was ist kaskadierung? -> sollte einmal verwendet werden
+//-> was ist kaskadierung? -> sollte einmal verwendet werden
 //-> evtl paging repos
 //-> alles an dennis schicken etc
 -> wie fehlgeschlagene rest requests behandeln?
 //-> dennis id hinzufügen
 //-> @Configuration bei factory
--> konto erstellen zuverlässig abbrechen und nachricht
+-> konto erstellen zuverlässig abbrechen und nachricht (und m26) 
 -> override hash und equals in entitys
 //-> in addresse number auf long ändern
 -> number in html in numerical
@@ -34,6 +35,7 @@ to.do
 Merken:
 man kann umstellen auf ohne dennis
 muss nichts löschen, da ich alle daten behalten möchte (rechtlich gesehen)
+max 11 accounts
 
 
 Änderungen:

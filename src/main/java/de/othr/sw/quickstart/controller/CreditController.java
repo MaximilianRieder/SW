@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestClientException;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,8 +46,14 @@ public class CreditController {
         if((accountService.getAccountByIban(iban).isEmpty()) || (amount <= 0)) {
             return "credit";
         }
-        Risikostufe risikostufe = creditService.getRisikoStufe(iban, amount);
-        System.out.println(risikostufe);
+        Risikostufe risikostufe = null;
+
+        try {
+            risikostufe = creditService.getRisikoStufe(iban, amount);
+        } catch (RestClientException e){
+            e.printStackTrace();
+        }
+
         if(risikostufe == null) {
             model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
             return "credit";

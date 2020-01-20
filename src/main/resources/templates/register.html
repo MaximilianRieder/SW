@@ -7,16 +7,16 @@
 <body>
 <h1>please enter your informations to register</h1>
 <form action="/registernew">
-    Username(Max. 8 Digits):<input type="text" name="username"><span th:text="${usernamecheck}"/><br/>
-    Password:<input type="text" name="password"><br/>
-    FirstName:<input type="text" name="firstName"><br/>
-    LastName:<input type="text" name="lastName"/><br/>
-    Birthday (dd-MM-yyyy):<input type="text" name="birthday"><span th:text="${falseDate}"></span><br/>
-    Street:<input type="text" name="street"/><br/>
-    Number:<input type="text" name="number"/><br/>
-    Zip:<input type="text" name="zip"/><br/>
-    City:<input type="text" name="city"/><br/>
-    Country:<input type="text" name="country"/><br/>
+    Username(Max. 8 Digits):<input type="text" name="username" required><span th:text="${usernamecheck}"/><br/>
+    Password:<input type="text" name="password" required/><br/>
+    FirstName:<input type="text" name="firstName" required/><br/>
+    LastName:<input type="text" name="lastName" required/><br/>
+    Birthday (dd-MM-yyyy):<input type="text" name="birthday" required><span th:text="${falseDate}"></span><br/>
+    Street:<input type="text" name="street" required/><br/>
+    Number:<input type="text" name="number" required/><br/>
+    Zip:<input type="text" name="zip" required/><br/>
+    City:<input type="text" name="city" required/><br/>
+    Country:<input type="text" name="country" required/><br/>
     <input type="submit" value="Register">
 </form>
 </body>

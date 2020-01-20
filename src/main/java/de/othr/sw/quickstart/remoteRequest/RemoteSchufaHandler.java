@@ -28,6 +28,6 @@ public class RemoteSchufaHandler implements RemoteSchufaHandlerIF {
     @Override
     public boolean updateUser(String name, Art art, int betrag) {
         ActivityDto activityDto = new ActivityDto(name, art, betrag);
-        return restClient.postForObject("", activityDto, boolean.class);
+        return restClient.postForObject("http://im-codd.oth-regensburg.de:8823/restapi/user", activityDto, boolean.class);
     }
 }
