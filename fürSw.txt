@@ -10,7 +10,7 @@ könnte bei dennis nicht funktionieren weil id in string umgeändert wurde
 -> override hash und equals in entitys
 -> number in html in numerical
 -> mehr geld am anfang
--> überall post / get thymeleaf methoden hinzufügen
+-> überall post / get thymeleaf methoden hinzufügen und im controller ändern
 
 to.do
 //-> checken ob zb liste empty (bankaccounts oder so) -> bei allem immer
@@ -37,6 +37,7 @@ Merken:
 man kann umstellen auf ohne dennis
 muss nichts löschen, da ich alle daten behalten möchte (rechtlich gesehen)
 max 11 accounts
+yml neben die .jar legen
 -> bei chronjob gehts nicht
 
 am schluss:

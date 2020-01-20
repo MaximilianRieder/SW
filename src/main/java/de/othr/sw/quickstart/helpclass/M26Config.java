@@ -5,18 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 
 public class M26Config {
-    //choose true to switch off schufa requests -> false to turn on
-    public static final boolean testWithouthSchufa = false;
-
-    // ID from dream schufa for authorisation
-    public static final int schufaId = 0;
-
-    //name of bank as user
-    public static final String bankName = "m26";
-    //in months
-    public static final int standardRepaymentTime = 12;
-    //interest Rate in Promille -> how much a customer has to pay back more for a credit (50 = 5%)
-    public static final int standardInterestRate = 50;
-    // would usually be once per month but for showcase every ten seconds
+    // would usually be once per month but for showcase every ten seconds (has to be static -> cant be initialized over yml)
     public static final String creditRepayRate = "*/10 * * * * *";
 }
