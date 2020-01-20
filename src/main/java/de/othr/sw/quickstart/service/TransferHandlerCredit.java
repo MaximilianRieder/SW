@@ -5,6 +5,7 @@ import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Transaction;
 import de.othr.sw.quickstart.entity.TransactionStatus;
 import de.othr.sw.quickstart.helpclass.M26Config;
+import de.othr.sw.quickstart.helpclass.YAMLConfig;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CreditRepository;
 import de.othr.sw.quickstart.repository.TransactionRepository;
@@ -18,6 +19,8 @@ import java.util.Optional;
 
 @Scope("singleton")
 public class TransferHandlerCredit implements TransferHandlerIF {
+    @Autowired
+    YAMLConfig yamlConfig;
     @Autowired
     TransactionRepository transactionRepository;
     @Autowired
@@ -40,12 +43,12 @@ public class TransferHandlerCredit implements TransferHandlerIF {
 
         //Update Credit @ Receiver
         ///calculate final credit amount (with interest)
-        long amountCred = amount + Math.round(((double) amount * ((double)M26Config.standardInterestRate / 1000)));
+        long amountCred = amount + Math.round(((double) amount * ((double)yamlConfig.getStandardInterestRate() / 1000)));
         //at least one cent income
         if (amountCred == amount)
             amountCred++;
         ///calculate repayment rate (at least 1)
-        long repaymentRate = Math.round((double) amountCred / M26Config.standardRepaymentTime);
+        long repaymentRate = Math.round((double) amountCred / yamlConfig.getStandardRepaymentTime());
         if (repaymentRate == 0)
             repaymentRate++;
 
@@ -75,7 +78,7 @@ public class TransferHandlerCredit implements TransferHandlerIF {
             //make credit and safe
             Credit credit = new Credit();
             credit.setRepaymentRate(repaymentRate);
-            credit.setInterestRate(M26Config.standardInterestRate);
+            credit.setInterestRate(yamlConfig.getStandardInterestRate());
             credit.setAmount(amount);
             credit.setRemainingAmountBack(amountCred);
             credit.setActiveCredit(true);

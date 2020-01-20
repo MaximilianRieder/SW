@@ -4,6 +4,7 @@ import de.othr.sw.quickstart.dtos.*;
 import de.othr.sw.quickstart.entity.*;
 
 import de.othr.sw.quickstart.helpclass.M26Config;
+import de.othr.sw.quickstart.helpclass.YAMLConfig;
 import de.othr.sw.quickstart.remoteRequest.RemoteSchufaHandlerIF;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CreditRepository;
@@ -25,7 +26,8 @@ import java.util.Optional;
 @Service
 @Scope("singleton")
 public class CreditService implements CreditServiceIF{
-
+    @Autowired
+    YAMLConfig yamlConfig;
     @Autowired
     @Qualifier("TransferHandlerCredit")
     private TransferHandlerIF transferHandlerCredit;
@@ -62,7 +64,7 @@ public class CreditService implements CreditServiceIF{
         String name = accountRepository.findByIban(receiverIban).get().getAccountHolder().getFirstName() + "" + accountRepository.findByIban(receiverIban).get().getAccountHolder().getLastName();
 
         //get accounts from bank
-        List<Account> bAccounts = accountRepository.findByAccountHolder_Username(M26Config.bankName);
+        List<Account> bAccounts = accountRepository.findByAccountHolder_Username(yamlConfig.getBankName());
 
         //iterate over bAccounts if bank has more than one account
         for (Account a: bAccounts
@@ -91,7 +93,7 @@ public class CreditService implements CreditServiceIF{
         for (Account a : accountsIterable
              ) {
             //skip bank account
-            if (!(a.getAccountHolder().getUsername().equals(M26Config.bankName))){
+            if (!(a.getAccountHolder().getUsername().equals(yamlConfig.getBankName()))){
                 repayCreditRate(a);
             } else {
             }
@@ -101,7 +103,7 @@ public class CreditService implements CreditServiceIF{
     @Transactional(propagation = Propagation.REQUIRED)
     public void repayCreditRate(Account a) {
         //send money to first account of bank m26
-        String bankIban = accountRepository.findByAccountHolder_Username(M26Config.bankName).get(0).getIban();
+        String bankIban = accountRepository.findByAccountHolder_Username(yamlConfig.getBankName()).get(0).getIban();
         //if account is account from bank return
         //get credits
         List<Credit> credits = a.getCredits();
@@ -136,7 +138,7 @@ public class CreditService implements CreditServiceIF{
                 } else {
                     //repayment didnt work
                     /// punitive interest (customer cant pay -> customer has to pay remaining credit * standard interest rate)
-                    c.setRemainingAmountBack(c.getRemainingAmountBack() + Math.round(((double)c.getRemainingAmountBack() * ((double)M26Config.standardInterestRate / 1000))));
+                    c.setRemainingAmountBack(c.getRemainingAmountBack() + Math.round(((double)c.getRemainingAmountBack() * ((double)yamlConfig.getStandardInterestRate() / 1000))));
                     creditRepository.save(c);
                 }
             }

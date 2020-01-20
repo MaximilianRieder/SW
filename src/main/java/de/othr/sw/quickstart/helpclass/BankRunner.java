@@ -23,11 +23,13 @@ public class BankRunner implements CommandLineRunner {
     private CustomerServiceIF customerService;
     @Autowired
     private AccountServiceIF accountService;
+    @Autowired
+    YAMLConfig yamlConfig;
 
     //initializes Bank data
     @Override
     public void run(String... args) throws Exception {
-        if(customerRepository.findByUsername(M26Config.bankName).isPresent()) {
+        if(customerRepository.findByUsername(yamlConfig.getBankName()).isPresent()) {
             return;
         }
         Address address = new Address();
@@ -37,10 +39,10 @@ public class BankRunner implements CommandLineRunner {
         address.setCity("Regensburg");
         address.setCountry("Germany");
         Customer customer = new Customer();
-        customer.setFirstName(M26Config.bankName);
-        customer.setLastName(M26Config.bankName);
-        customer.setPassword(M26Config.bankName);
-        customer.setUsername(M26Config.bankName);
+        customer.setFirstName(yamlConfig.getBankName());
+        customer.setLastName(yamlConfig.getBankName());
+        customer.setPassword(yamlConfig.getBankName());
+        customer.setUsername(yamlConfig.getBankName());
         //gründung
         String birthday = "01-01-2000";
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");

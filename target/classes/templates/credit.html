@@ -5,12 +5,6 @@
     <title>Credit</title>
 </head>
 <body>
-<form action="/credit/request">
-    Request Credit
-    amount: <input type="number" name="amount"><br/>
-    chose account for pay back: <input type="text" name="account"><br/>
-    <input type="submit" value="credit">
-</form>
 <form th:action="@{/credit/request}" th:object="${senderIban}" th:method="get">
     <select id="senderIban" name="senderIban">
         <option th:each="account : ${accounts}"

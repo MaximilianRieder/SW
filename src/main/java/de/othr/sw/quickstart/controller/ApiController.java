@@ -8,11 +8,13 @@ import de.othr.sw.quickstart.service.AccountServiceIF;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import de.othr.sw.quickstart.service.TransactionServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
+@Scope("session")
 @RequestMapping("/restapi")
 public class ApiController {
     @Autowired

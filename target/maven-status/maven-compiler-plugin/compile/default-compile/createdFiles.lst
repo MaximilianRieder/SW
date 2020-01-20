@@ -11,6 +11,7 @@ de\othr\sw\quickstart\dtos\Risikostufe.class
 de\othr\sw\quickstart\service\TransferHandlerFactory.class
 de\othr\sw\quickstart\controller\HomeController.class
 de\othr\sw\quickstart\remoteRequest\RemoteSchufaHandlerIF.class
+de\othr\sw\quickstart\controller\CreditController$1.class
 de\othr\sw\quickstart\controller\AccountController.class
 de\othr\sw\quickstart\controller\CreditController.class
 de\othr\sw\quickstart\repository\TransactionRepository.class
@@ -34,6 +35,7 @@ de\othr\sw\quickstart\remoteRequest\RemoteSchufaHandler.class
 de\othr\sw\quickstart\controller\TransactionController.class
 de\othr\sw\quickstart\service\AccountServiceIF.class
 de\othr\sw\quickstart\repository\CreditRepository.class
+de\othr\sw\quickstart\service\TransactionService$1.class
 de\othr\sw\quickstart\entity\TransactionStatus.class
 de\othr\sw\quickstart\helpclass\BankRunner.class
 de\othr\sw\quickstart\service\TransactionService.class

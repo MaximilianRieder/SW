@@ -6,12 +6,15 @@ import de.othr.sw.quickstart.dtos.RiskDto;
 import de.othr.sw.quickstart.dtos.RiskResponseDto;
 import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.helpclass.M26Config;
+import de.othr.sw.quickstart.helpclass.YAMLConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
 
 public class RemoteSchufaHandler implements RemoteSchufaHandlerIF {
+    @Autowired
+    YAMLConfig yamlConfig;
     @Autowired
     private RestTemplate restClient;
 
@@ -20,7 +23,7 @@ public class RemoteSchufaHandler implements RemoteSchufaHandlerIF {
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String birthday = format.format(customer.getBirthday());
         System.out.println(birthday);
-        RiskDto riskDto = new RiskDto(M26Config.schufaId, customer.getFirstName() + " " + customer.getLastName(), birthday, (int)amount);
+        RiskDto riskDto = new RiskDto(yamlConfig.getSchufaId(), customer.getFirstName() + " " + customer.getLastName(), birthday, (int)amount);
         RiskResponseDto riskResponseDto = restClient.postForObject("http://im-codd.oth-regensburg.de:8823/restapi/risk", riskDto, RiskResponseDto.class);
         return riskResponseDto;
     }

@@ -1,0 +1,16 @@
+spring:
+  profiles: test
+testWithouthSchufa: true
+schufaId: c3da5d02-4829-45a8-b631-0b68221e57e8
+bankName: m26
+standardRepaymentTime: 12
+standardInterestRate: 50
+
+---
+spring:
+  profiles: prod
+testWithouthSchufa: false
+schufaId: c3da5d02-4829-45a8-b631-0b68221e57e8
+bankName: m26
+standardRepaymentTime: 12
+standardInterestRate: 50

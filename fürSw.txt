@@ -1,8 +1,26 @@
-//-riskestimation nutzen (muss noch in controller)
+könnte bei dennis nicht funktionieren weil id in string umgeändert wurde
 
+-> alle @... müssen scope haben
+-> standard "header" (navigationsleiste) machen und "wiederverwenden"
+-> "" nicht als gültigen user zulassen
+-> security reworken -> Right und Customer Right rauslöschen
+-> Exceptions aufpassen
+-> wie fehlgeschlagene rest requests behandeln?
+-> konto erstellen zuverlässig abbrechen und nachricht (und m26) 
+-> override hash und equals in entitys
+-> number in html in numerical
+-> mehr geld am anfang
+-> überall post / get thymeleaf methoden hinzufügen
+
+to.do
+//-> checken ob zb liste empty (bankaccounts oder so) -> bei allem immer
+-> nochmal auf die ganzen optional achten -> zum beispiel in accountService bei get account || customer service get cutomer
+-> evtl Optional nochmal umschreiben
+
+//-riskestimation nutzen (muss noch in controller)
 wichtig:
 //-> bei account accountHolder cascade? und umgekehrt?
--> safe bei credit handler customer // credit raus
+//-> safe bei credit handler customer // credit raus
 //-> riskestimation nutzen (muss noch in controller)
 //-> Allen CDI-Beansder Anwendung MUSS ein fachlich und technisch sinnvoller Scopezugeteilt werden
 //-> scopes
@@ -10,33 +28,20 @@ wichtig:
 //-> was ist kaskadierung? -> sollte einmal verwendet werden
 //-> evtl paging repos
 //-> alles an dennis schicken etc
--> wie fehlgeschlagene rest requests behandeln?
 //-> dennis id hinzufügen
 //-> @Configuration bei factory
--> konto erstellen zuverlässig abbrechen und nachricht (und m26) 
--> override hash und equals in entitys
 //-> in addresse number auf long ändern
--> number in html in numerical
--> mehr geld am anfang
--> überall post / get thymeleaf methoden hinzufügen
 //-> security checken ob alles stimmt
--> standard "header" (navigationsleiste) machen und "wiederverwenden"
--> "" nicht als gültigen user zulassen
--> security reworken -> Right und Customer Right rauslöschen
--> Exceptions aufpassen
-
-to.do
-//-> checken ob zb liste empty (bankaccounts oder so) -> bei allem immer
--> nochmal auf die ganzen optional achten -> zum beispiel in accountService bei get account || customer service get cutomer
--> evtl Optional nochmal umschreiben
-
-
 
 Merken:
 man kann umstellen auf ohne dennis
 muss nichts löschen, da ich alle daten behalten möchte (rechtlich gesehen)
 max 11 accounts
+-> bei chronjob gehts nicht
 
+am schluss:
+-> readme
+-> 1 meilenstein nochmal
 
 Änderungen:
 Adresse kunde -> 1 zu 1
