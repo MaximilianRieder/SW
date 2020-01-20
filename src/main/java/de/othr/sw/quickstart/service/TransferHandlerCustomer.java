@@ -6,6 +6,7 @@ import de.othr.sw.quickstart.entity.TransactionStatus;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -17,10 +18,10 @@ public class TransferHandlerCustomer implements TransferHandlerIF {
     TransactionRepository transactionRepository;
     @Autowired
     AccountRepository accountRepository;
-    Date date;
 
     @Override
     public Optional<Transaction> transferMoney(String senderIban, String receiverIban, long amount) {
+        Date date;
         //check if ibans correct
         Optional<Account> receiverAccountO = accountRepository.findByIban(receiverIban);
         Optional<Account> senderAccountO = accountRepository.findByIban(senderIban);

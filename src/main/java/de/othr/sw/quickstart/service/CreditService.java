@@ -11,6 +11,7 @@ import de.othr.sw.quickstart.repository.CustomerRepository;
 import de.othr.sw.quickstart.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@Scope("singleton")
 public class CreditService implements CreditServiceIF{
 
     @Autowired

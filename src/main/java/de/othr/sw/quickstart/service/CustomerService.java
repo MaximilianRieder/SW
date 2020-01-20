@@ -4,6 +4,7 @@ import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @Service
 @Transactional
 @Qualifier("customer")
+@Scope("singleton")
 public class CustomerService implements CustomerServiceIF, UserDetailsService {
 
     @Autowired

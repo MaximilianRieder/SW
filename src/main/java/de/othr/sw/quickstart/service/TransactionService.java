@@ -6,6 +6,7 @@ import de.othr.sw.quickstart.entity.Customer;
 import de.othr.sw.quickstart.entity.TransactionStatus;
 import de.othr.sw.quickstart.remoteRequest.RemoteSchufaHandlerIF;
 import de.othr.sw.quickstart.repository.AccountRepository;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.domain.Page;
 
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +23,7 @@ import java.util.*;
 
 @Service
 @Transactional
+@Scope("singleton")
 public class TransactionService implements TransactionServiceIF {
 
     @Autowired

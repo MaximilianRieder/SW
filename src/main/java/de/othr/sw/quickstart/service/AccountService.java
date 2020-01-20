@@ -7,6 +7,7 @@ import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CustomerRepository;
 import org.hibernate.validator.constraints.EAN;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 @Service
 @Transactional
+@Scope("singleton")
 public class AccountService implements AccountServiceIF{
     @Autowired
     private CustomerServiceIF customerService;
@@ -27,16 +29,9 @@ public class AccountService implements AccountServiceIF{
     @Override
     public Account createAccount(Account account, long id) {
         Customer accountHolder = customerRepository.findById(id).get();
-//        Credit credit = new Credit();
-//        credit.setActiveCredit(false);
-//        credit.setInterestRate(0);
-//        credit.setAmount(0);
-//        credit.setRepaymentRate(0);
-//        account.setCredit(credit);
         account = accountRepository.save(account);
         String iban = createNewIban(account);
         account.setCredits(null);
-        System.out.println(iban);
         account.setIban(iban);
         accountHolder.addAccount(account);
         accountHolder = customerRepository.save(accountHolder);
