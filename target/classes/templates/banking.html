@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Transactions</title>
 </head>
+<head th:replace="fragments/header :: standardheader"/>
 <body>
+<div th:replace="fragments/header :: navigation"/>
 <form th:action="@{/transaction/transafer}" th:object="${senderIban}" th:method="get">
 
     <select id="senderIban" name="senderIban">

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Credit</title>
 </head>
+<head th:replace="fragments/header :: standardheader"/>
 <body>
+<div th:replace="fragments/header :: navigation"/>
 <form th:action="@{/credit/request}" th:object="${senderIban}" th:method="get">
     <select id="senderIban" name="senderIban">
         <option th:each="account : ${accounts}"

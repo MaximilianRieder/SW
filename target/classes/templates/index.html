@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Registrierung</title>
 </head>
+<head th:replace="fragments/header :: standardheader"/>
 <body>
+    <div th:replace="fragments/header :: navigation"/>
     <form action="/register">
         <input type="submit" value="register">
     </form>

@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<head th:replace="fragments/header :: standardheader"/>
 <body>
+<div th:replace="fragments/header :: navigation"/>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
