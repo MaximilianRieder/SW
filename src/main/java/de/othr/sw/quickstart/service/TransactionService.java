@@ -81,6 +81,7 @@ public class TransactionService implements TransactionServiceIF {
                 return t1.getDate().compareTo(t2.getDate());
             }
         });
+        Collections.reverse(transactions);
         return transactions;
     }
 }

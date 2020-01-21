@@ -65,7 +65,7 @@ public class HomeController {
             Model model
     ) {
         model.addAttribute("customerKey", customerService.getLoggedInCustomer().getCustomerKey());
-        return "startPage";
+        return "accountManagement";
     }
 
 //    @RequestMapping("/showAccounts")

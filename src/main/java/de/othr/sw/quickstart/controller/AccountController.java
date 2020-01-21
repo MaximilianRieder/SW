@@ -28,14 +28,11 @@ public class AccountController {
         account.setAccountHolder(null);
 
         if (customerService.getLoggedInCustomer().getAccounts().size() > 10) {
+            model.addAttribute("accountCreationMessage","Creation limit reached, contact us if you want more account space.");
             return "accountManagement";
         }
-        accountService.createAccount(account, customerService.getLoggedInCustomer().getId());
-        for (Account a:customerService.getLoggedInCustomer().getAccounts()) {
-            model.addAttribute("accountUsername", a.getIban());
-            model.addAttribute("accountBalance", a.getId());
-        }
-
+        account = accountService.createAccount(account, customerService.getLoggedInCustomer().getId());
+        model.addAttribute("accountCreationMessage","New Account: " + account.getIban());
         return "accountManagement";
     }
 }

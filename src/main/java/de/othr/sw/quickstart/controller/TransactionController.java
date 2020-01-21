@@ -4,6 +4,7 @@ import de.othr.sw.quickstart.entity.Account;
 import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Transaction;
 import de.othr.sw.quickstart.entity.TransactionStatus;
+import de.othr.sw.quickstart.helpclass.YAMLConfig;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.service.AccountServiceIF;
 import de.othr.sw.quickstart.service.CreditServiceIF;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +31,8 @@ public class TransactionController {
     CustomerServiceIF customerService;
     @Autowired
     AccountServiceIF accountService;
+    @Autowired
+    YAMLConfig yamlConfig;
 
     @RequestMapping("/transafer")
     public String doTransaction(
@@ -64,13 +68,16 @@ public class TransactionController {
     }
 
     @RequestMapping("history")
-    public String showTransactions(
+    public String showTransactionsMore(
             Model model
     ) {
         if(customerService.getLoggedInCustomer().getAccounts().isEmpty())
             return "accountManagement";
-        List<Transaction> transactions = transactionService.getLastTransactions(customerService.getLoggedInCustomer(), 20);
+
+        //returns history with number (rounded -> after dividation through account number)
+        List<Transaction> transactions = transactionService.getLastTransactions(customerService.getLoggedInCustomer(), yamlConfig.getHistoryNumber());
         model.addAttribute("transactions", transactions);
+
         return "accountManagement";
     }
 }

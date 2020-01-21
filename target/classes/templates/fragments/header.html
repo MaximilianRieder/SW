@@ -32,16 +32,17 @@
                 </li>
             </ul>
             <div sec:authorize="!isAuthenticated()">
-                <form class="form-inline my-2 my-lg-0" th:action="@{/login}" th:method="post">
+                <form class="form-inline my-2 my-lg-0" th:action="@{/login}" th:method="get">
                     <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Login</button>
                 </form>
             </div>
             <div sec:authorize="isAuthenticated()">
-                <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" th:method="post">
+                <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" th:method="get">
                     <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Logout</button>
                 </form>
             </div>
         </div>
     </nav>
 </div>
+<p style="margin-bottom: 25px"></p>
 </html>

@@ -23,6 +23,8 @@ public class YAMLConfig {
     private int standardRepaymentTime;
     //interest Rate in Promille -> how much a customer has to pay back more for a credit (50 = 5%)
     private int standardInterestRate;
+    //how many transaction are shown in history
+    private int historyNumber;
 
     public boolean isTestWithouthSchufa() {
         return testWithouthSchufa;
@@ -54,6 +56,14 @@ public class YAMLConfig {
 
     public void setStandardRepaymentTime(int standardRepaymentTime) {
         this.standardRepaymentTime = standardRepaymentTime;
+    }
+
+    public int getHistoryNumber() {
+        return historyNumber;
+    }
+
+    public void setHistoryNumber(int historyNumber) {
+        this.historyNumber = historyNumber;
     }
 
     public int getStandardInterestRate() {

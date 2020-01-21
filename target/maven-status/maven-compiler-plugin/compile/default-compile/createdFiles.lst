@@ -32,8 +32,10 @@ de\othr\sw\quickstart\service\TransferHandlerIF.class
 de\othr\sw\quickstart\entity\Right2.class
 de\othr\sw\quickstart\helpclass\M26Config.class
 de\othr\sw\quickstart\remoteRequest\RemoteSchufaHandler.class
+de\othr\sw\quickstart\helpclass\YAMLConfig.class
 de\othr\sw\quickstart\controller\TransactionController.class
 de\othr\sw\quickstart\service\AccountServiceIF.class
+de\othr\sw\quickstart\helpclass\WebConfig.class
 de\othr\sw\quickstart\repository\CreditRepository.class
 de\othr\sw\quickstart\service\TransactionService$1.class
 de\othr\sw\quickstart\entity\TransactionStatus.class

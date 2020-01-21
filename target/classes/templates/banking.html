@@ -7,23 +7,33 @@
 <head th:replace="fragments/header :: standardheader"/>
 <body>
 <div th:replace="fragments/header :: navigation"/>
-<form th:action="@{/transaction/transafer}" th:object="${senderIban}" th:method="get">
 
-    <select id="senderIban" name="senderIban">
-    <option th:each="account : ${accounts}"
-            th:value="${account.iban}"
-            th:text="${account.iban}"
-    >Options</option>
-    </select>
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Accounts</h4>
+            </div>
+            <div class="card-body">
 
-    <!--iban sender:<input type="text" name="senderIban" required><br/>-->
-    iban receiver:<input type="text" name="receiverIban" required><br/>
-    amount: <input type="number" name="amount" required><br/>
-    <input type="submit" value="transfer">
-    transactionStatus<span th:text="${transactionStatus}"></span>
-</form>
-<form action="/startPage">
-    <input type="submit" value="startpage">
-</form>
+                <form th:action="@{/transaction/transafer}" th:object="${senderIban}" th:method="get">
+
+                    <select id="senderIban" name="senderIban">
+                        <option th:each="account : ${accounts}"
+                                th:value="${account.iban}"
+                                th:text="${account.iban}"
+                        >Options</option>
+                    </select> <br>
+                    iban receiver:<input type="text" name="receiverIban" required><br/>
+                    amount: <input type="number" name="amount" required><br/>
+                    <input type="submit" value="transfer"><br>
+                    <span th:text="${transactionStatus}"></span>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

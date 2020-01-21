@@ -7,22 +7,55 @@
 <head th:replace="fragments/header :: standardheader"/>
 <body>
 <div th:replace="fragments/header :: navigation"/>
-<form action="/account/create">
-    <span th:text="${accountBalance}"/><br/>
-    <span th:text="${accountUsername}"/><br/>
-    <input type="submit" value="account create">
-</form>
-<form action="/transaction/history">
-    <div th:each="transaction : ${transactions}">
-        id:<span th:text="${transaction.id}"> </span>
-        amount: <span th:text="${transaction.amount}"> </span>
-        sender: <span th:text="${transaction.sender.iban}"> </span>
-        receiver: <span th:text="${transaction.receiver.iban}"> </span>
+
+<div class="container">
+<div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Create Account</h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/account/create}" th:method="get">
+                <span th:text="${accountCreationMessage}"></span>
+                <button type="submit" class="btn btn-lg btn-block btn-info">Create account</button>
+                Press this button to automatically create a new account.
+            </form>
+        </div>
     </div>
-    <input type="submit" value="transactionHistory">
-</form>
-<form action="/startPage">
-    <input type="submit" value="startpage">
-</form>
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Account Key</h4>
+        </div>
+        <div class="card-body">
+            <div class="card-body">
+                <form th:action="@{/showKey}" th:method="get">
+                    <span th:text="${customerKey}"></span>
+                    <button type="submit" class="btn btn-lg btn-block btn-info">Show Api Key</button>
+                    You need this token, to authenticate your account at Services, which have automatic transfer.
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Transaction History</h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/transaction/history}" th:method="get">
+                <div th:each="transaction : ${transactions}">
+                    <b><span th:text="${#dates.format(transaction.date, 'dd-MM-yyyy HH:mm')}"> </span></b><br>
+                    amount: <span th:text="${transaction.amount / 100.00}"> </span>
+                    sender: <span th:text="${transaction.sender.iban}"> </span>
+                    receiver: <span th:text="${transaction.receiver.iban}"> </span>
+                </div>
+                <button type="submit" class="btn btn-lg btn-block btn-info">Show Transaction History</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
 </body>
 </html>
