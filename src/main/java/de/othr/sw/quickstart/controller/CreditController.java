@@ -46,18 +46,9 @@ public class CreditController {
         if((accountService.getAccountByIban(iban).isEmpty()) || (amount <= 0)) {
             return "credit";
         }
-        Risikostufe risikostufe = null;
 
-        try {
-            risikostufe = creditService.getRisikoStufe(iban, amount);
-        } catch (RestClientException e){
-            e.printStackTrace();
-        }
-
-        if(risikostufe == null) {
-            model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
-            return "credit";
-        }
+        //returns embargo if schufa not reachable (change yml config to turn schufa off)
+        Risikostufe risikostufe = creditService.getRisikoStufe(iban, amount);
 
         switch (risikostufe) {
             case EMBARGO:

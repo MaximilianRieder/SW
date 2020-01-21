@@ -49,8 +49,13 @@ public class CreditService implements CreditServiceIF{
         }
         Customer customer = accountRepository.findByIban(iban).get().getAccountHolder();
         //get risk estimation
-        RiskResponseDto riskResponseDto = remoteSchufaHandler.getRiskEstimation(customer, amount);
-        Risikostufe risikostufe = riskResponseDto.getRisikostufe();
+        Optional<RiskResponseDto> riskResponseDtoO = remoteSchufaHandler.getRiskEstimation(customer, amount);
+
+        //return embargo if schufa couldnt be reached as standart value
+        if(riskResponseDtoO.isEmpty())
+            return Risikostufe.EMBARGO;
+
+        Risikostufe risikostufe = riskResponseDtoO.get().getRisikostufe();
         return risikostufe;
     }
 

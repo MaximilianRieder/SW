@@ -1,3 +1,4 @@
+<!-- https://getbootstrap.com/docs/4.0/examples/pricing/ -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
@@ -35,5 +36,42 @@
     </div>
     <input type="submit" value="show accounts">
 </form>
+
+
+<div class="container">
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Free</h4>
+            </div>
+            <div class="card-body">
+                    <div th:each="account : ${accounts}">
+                        iban:<span th:text="${account.iban}"> </span>
+                        balance: <span th:text="${account.balance}"> </span>
+                        <div th:each="credit : ${account.credits}">
+                            <span th:if="${account.credits.activeCredit == 'true'}">
+                                got credit with amount:<span th:text="${credit.amount}"> </span>
+                                still has to pay: <span th:text="${credit.remainingAmountBack}"> </span>
+                            </span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Pro</h4>
+            </div>
+            <div class="card-body">
+                <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>20 users included</li>
+                    <li>10 GB of storage</li>
+                    <li>Priority email support</li>
+                    <li>Help center access</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

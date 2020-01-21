@@ -1,6 +1,7 @@
 könnte bei dennis nicht funktionieren weil id in string umgeändert wurde
 
 -> alle @... müssen scope haben
+-> wenn als bank angemeldet kredit -> bug
 -> standard "header" (navigationsleiste) machen und "wiederverwenden"
 -> "" nicht als gültigen user zulassen
 -> security reworken -> Right und Customer Right rauslöschen
@@ -11,6 +12,7 @@ könnte bei dennis nicht funktionieren weil id in string umgeändert wurde
 -> number in html in numerical
 -> mehr geld am anfang
 -> überall post / get thymeleaf methoden hinzufügen und im controller ändern
+-> http://localhost:8859/credit/request?senderIban=DE26000000000000000014&amount=12 mit falscher iban testen
 
 to.do
 //-> checken ob zb liste empty (bankaccounts oder so) -> bei allem immer

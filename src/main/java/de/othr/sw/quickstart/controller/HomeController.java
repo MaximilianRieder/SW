@@ -37,7 +37,12 @@ public class HomeController {
     public String goLogin() { return "login";}
 
     @RequestMapping("/startPage")
-    public String goStartPage() { return "startPage"; }
+    public String goStartPage(
+            Model model
+    ) {
+        model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
+        return "startPage";
+    }
 
     @RequestMapping("/accountManagement")
     public String goAccountManagement() { return "accountManagement";}
@@ -63,13 +68,13 @@ public class HomeController {
         return "startPage";
     }
 
-    @RequestMapping("/showAccounts")
-    public String showAccounts(
-            Model model
-    ) {
-        model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
-        return "startPage";
-    }
+//    @RequestMapping("/showAccounts")
+//    public String showAccounts(
+//            Model model
+//    ) {
+//        model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
+//        return "startPage";
+//    }
 
     @RequestMapping("/registernew")
     public String registerNew(
