@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
@@ -18,7 +19,7 @@ public class AccountController {
     private CustomerServiceIF customerService;
     @Autowired
     private AccountServiceIF accountService;
-    @RequestMapping("/create")
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String goStartPage(
             Model model
     ) {

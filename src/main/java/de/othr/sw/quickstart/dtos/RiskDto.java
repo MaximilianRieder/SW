@@ -3,7 +3,7 @@ package de.othr.sw.quickstart.dtos;
 import java.io.Serializable;
 
 public class RiskDto implements Serializable {
-    String CustomerID;
+    String apiKey;
     String name;
     String geburtsdatum;
     int betrag;
@@ -11,19 +11,19 @@ public class RiskDto implements Serializable {
     public RiskDto() {
     }
 
-    public RiskDto(String customerID, String name, String geburtsdatum, int betrag) {
-        CustomerID = customerID;
+    public RiskDto(String apiKey, String name, String geburtsdatum, int betrag) {
+        this.apiKey = apiKey;
         this.name = name;
         this.geburtsdatum = geburtsdatum;
         this.betrag = betrag;
     }
 
-    public String getCustomerID() {
-        return CustomerID;
+    public String getApiKey() {
+        return apiKey;
     }
 
-    public void setCustomerID(String customerID) {
-        CustomerID = customerID;
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
     public String getName() {

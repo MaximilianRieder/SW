@@ -44,18 +44,21 @@ public class TransactionService implements TransactionServiceIF {
         //notify schufa
         if((accountRepository.findByIban(senderIban).isEmpty()) || (accountRepository.findByIban(receiverIban).isEmpty()))
             return transO;
-        String receiverName = accountRepository.findByIban(receiverIban).get().getAccountHolder().getFirstName() + "" + accountRepository.findByIban(receiverIban).get().getAccountHolder().getLastName();
-        String senderName = accountRepository.findByIban(senderIban).get().getAccountHolder().getFirstName() + "" + accountRepository.findByIban(senderIban).get().getAccountHolder().getLastName();
+        Customer receiver = accountRepository.findByIban(receiverIban).get().getAccountHolder();
+        Customer sender = accountRepository.findByIban(senderIban).get().getAccountHolder();
+
+        String receiverName = receiver.getFirstName() + " " + receiver.getLastName();
+        String senderName = sender.getFirstName() + " " + sender.getLastName();
         //check if there was a transaction
         if (transO.isEmpty())
             return transO;
         //noitfy with responding status
         if (transO.get().getStatus() == TransactionStatus.SUCCESS) {
-            remoteSchufaHandler.updateUser(receiverName, Art.ZAHLUNGSEINGANG, (int)amount);
-            remoteSchufaHandler.updateUser(senderName, Art.ZAHLUNGERFOLGREICH, (int) amount);
+            remoteSchufaHandler.updateUser("zahlungseingang", Art.ZAHLUNGSEINGANG, (int)amount, receiverName, receiver.getBirthday());
+            remoteSchufaHandler.updateUser("zahlung erfolgreich", Art.ZAHLUNGERFOLGREICH, (int) amount, senderName, sender.getBirthday());
             return transO;
         } else if (transO.get().getStatus() == TransactionStatus.FAILURE) {
-            remoteSchufaHandler.updateUser(senderName, Art.ZAHLUNGABGELEHNT, (int) amount);
+            remoteSchufaHandler.updateUser("zahlungabgelehnt", Art.ZAHLUNGABGELEHNT, (int) amount, senderName, sender.getBirthday());
             return transO;
         } else {
             return transO;

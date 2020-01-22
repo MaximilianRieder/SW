@@ -3,13 +3,11 @@ package de.othr.sw.quickstart.service;
 import de.othr.sw.quickstart.dtos.*;
 import de.othr.sw.quickstart.entity.*;
 
-import de.othr.sw.quickstart.helpclass.M26Config;
-import de.othr.sw.quickstart.helpclass.YAMLConfig;
+import de.othr.sw.quickstart.helpclassAndConfig.M26Config;
+import de.othr.sw.quickstart.helpclassAndConfig.YAMLConfig;
 import de.othr.sw.quickstart.remoteRequest.RemoteSchufaHandlerIF;
 import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.repository.CreditRepository;
-import de.othr.sw.quickstart.repository.CustomerRepository;
-import de.othr.sw.quickstart.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -18,8 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,6 +64,7 @@ public class CreditService implements CreditServiceIF{
         }
 
         String name = accountRepository.findByIban(receiverIban).get().getAccountHolder().getFirstName() + "" + accountRepository.findByIban(receiverIban).get().getAccountHolder().getLastName();
+        Date birthday = accountRepository.findByIban(receiverIban).get().getAccountHolder().getBirthday();
 
         //get accounts from bank
         List<Account> bAccounts = accountRepository.findByAccountHolder_Username(yamlConfig.getBankName());
@@ -79,7 +77,7 @@ public class CreditService implements CreditServiceIF{
             if(transactionO.isPresent()) {
                 if (transactionO.get().getStatus() == TransactionStatus.SUCCESS){
                     //notify schufa
-                    remoteSchufaHandler.updateUser(name, Art.KREDITAUFGENOMMEN, (int)amount);
+                    remoteSchufaHandler.updateUser("kreditaufnahme", Art.KREDITAUFGENOMMEN, (int)amount, name, birthday);
                     return true;
                 } else {
                     return false;
@@ -109,6 +107,7 @@ public class CreditService implements CreditServiceIF{
     public void repayCreditRate(Account a) {
         //send money to first account of bank m26
         String bankIban = accountRepository.findByAccountHolder_Username(yamlConfig.getBankName()).get(0).getIban();
+
         //if account is account from bank return
         //get credits
         List<Credit> credits = a.getCredits();
@@ -134,7 +133,7 @@ public class CreditService implements CreditServiceIF{
                         //repaid credit
                         //notify schufa
                         String name = accountRepository.findByIban(a.getIban()).get().getAccountHolder().getFirstName() + "" + accountRepository.findByIban(a.getIban()).get().getAccountHolder().getLastName();
-                        remoteSchufaHandler.updateUser(name, Art.KREDITABBEZAHLT, (int)c.getAmount());
+                        remoteSchufaHandler.updateUser("kreditabbezahlt", Art.KREDITABBEZAHLT, (int)c.getAmount(), a.getAccountHolder().getFirstName() + " " + a.getAccountHolder().getLastName(), a.getAccountHolder().getBirthday());
 
                         c.setRemainingAmountBack(0);
                         c.setActiveCredit(false);

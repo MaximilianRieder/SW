@@ -4,9 +4,10 @@ import de.othr.sw.quickstart.dtos.Art;
 import de.othr.sw.quickstart.dtos.RiskResponseDto;
 import de.othr.sw.quickstart.entity.Customer;
 
+import java.util.Date;
 import java.util.Optional;
 
 public interface RemoteSchufaHandlerIF {
     public Optional<RiskResponseDto> getRiskEstimation(Customer customer, long amount);
-    public boolean updateUser(String name, Art art, int betrag);
+    public boolean updateUser(String name, Art art, int betrag, String nameKunde, Date geburtsdatum);
 }

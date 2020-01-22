@@ -33,8 +33,6 @@ public class AccountService implements AccountServiceIF{
         account.setCredits(null);
         account.setIban(iban);
         accountHolder.addAccount(account);
-        //accountHolder = customerRepository.save(accountHolder);
-        //account = accountRepository.save(account);
         return account;
     }
 
@@ -88,7 +86,7 @@ public class AccountService implements AccountServiceIF{
             return false;
         } else {
             Account account = accountO.get();
-            if (account.getAccountHolder().getCustomerKey().equals(UUID.fromString(customerKey))) {
+            if (account.getAccountHolder().getCustomerKey().toString().equals(customerKey)) {
                 return true;
             } else {
                 return false;

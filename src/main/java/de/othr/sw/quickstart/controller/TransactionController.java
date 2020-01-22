@@ -1,13 +1,9 @@
 package de.othr.sw.quickstart.controller;
 
-import de.othr.sw.quickstart.entity.Account;
-import de.othr.sw.quickstart.entity.Credit;
 import de.othr.sw.quickstart.entity.Transaction;
 import de.othr.sw.quickstart.entity.TransactionStatus;
-import de.othr.sw.quickstart.helpclass.YAMLConfig;
-import de.othr.sw.quickstart.repository.AccountRepository;
+import de.othr.sw.quickstart.helpclassAndConfig.YAMLConfig;
 import de.othr.sw.quickstart.service.AccountServiceIF;
-import de.othr.sw.quickstart.service.CreditServiceIF;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import de.othr.sw.quickstart.service.TransactionServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +30,7 @@ public class TransactionController {
     @Autowired
     YAMLConfig yamlConfig;
 
-    @RequestMapping("/transafer")
+    @RequestMapping(value = "/transafer", method = RequestMethod.POST)
     public String doTransaction(
             Model model,
             @ModelAttribute("senderIban") String senderIban,
@@ -67,7 +63,7 @@ public class TransactionController {
         return "banking";
     }
 
-    @RequestMapping("history")
+    @RequestMapping(value = "history", method = RequestMethod.GET)
     public String showTransactionsMore(
             Model model
     ) {

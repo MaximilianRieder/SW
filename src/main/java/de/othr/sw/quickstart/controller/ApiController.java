@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@Scope("session")
+@Scope("singleton")
 @RequestMapping("/restapi")
 public class ApiController {
     @Autowired
@@ -28,6 +28,20 @@ public class ApiController {
     @ResponseBody
     public TransactionReturnDto transfer(@RequestBody TransactionRequestDto requestDto) {
         TransactionReturnDto returnDto = new TransactionReturnDto();
+
+        if(requestDto.getSenderKey().length() != 36 || (!(accountService.verifyAccount(requestDto.getSenderIban(), requestDto.getSenderKey())))) {
+            returnDto.setId(-1);
+            returnDto.setMessage("authorisation failure");
+            returnDto.setStatus(false);
+            return  returnDto;
+        }
+
+        if(requestDto.getAmount() <= 0) {
+            returnDto.setId(-1);
+            returnDto.setMessage("enter positive amount");
+            returnDto.setStatus(false);
+            return  returnDto;
+        }
 
         //check if key matches with account and if UUID has right length
         if(requestDto.getSenderKey().length() != 36 || (!(accountService.verifyAccount(requestDto.getSenderIban(), requestDto.getSenderKey())))) {

@@ -2,7 +2,6 @@ package de.othr.sw.quickstart.controller;
 
 import de.othr.sw.quickstart.entity.Address;
 import de.othr.sw.quickstart.entity.Customer;
-import de.othr.sw.quickstart.service.AccountService;
 import de.othr.sw.quickstart.service.AccountServiceIF;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +27,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String start() {
-        return "index";
+        return "login";
     }
 
     @RequestMapping("/register")
@@ -68,15 +68,7 @@ public class HomeController {
         return "accountManagement";
     }
 
-//    @RequestMapping("/showAccounts")
-//    public String showAccounts(
-//            Model model
-//    ) {
-//        model.addAttribute("accounts", accountService.getAccountsByCustomer(customerService.getLoggedInCustomer()));
-//        return "startPage";
-//    }
-
-    @RequestMapping("/registernew")
+    @RequestMapping(value = "/registernew", method = RequestMethod.POST)
     public String registerNew(
             @ModelAttribute("firstName") String fname,
             @ModelAttribute("lastName") String lname,

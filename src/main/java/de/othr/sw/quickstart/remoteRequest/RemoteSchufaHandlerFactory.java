@@ -1,7 +1,6 @@
 package de.othr.sw.quickstart.remoteRequest;
 
-import de.othr.sw.quickstart.helpclass.M26Config;
-import de.othr.sw.quickstart.helpclass.YAMLConfig;
+import de.othr.sw.quickstart.helpclassAndConfig.YAMLConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

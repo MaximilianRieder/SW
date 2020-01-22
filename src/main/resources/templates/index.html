@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="UTF-8">
     <title>Registrierung</title>
@@ -8,10 +8,10 @@
 <body>
     <div th:replace="fragments/header :: navigation"/>
     <form action="/register">
-        <input type="submit" value="register">
+        <button type="submit" class="btn btn-info btn-block">Register</button>
     </form>
     <form action="/login">
-        <input type="submit" value="login">
+        <button type="submit" class="btn btn-info btn-block">Login</button>
     </form>
 </body>
 </html>

@@ -10,7 +10,7 @@ historyNumber: 30
 ---
 spring:
   profiles: prod
-testWithouthSchufa: true
+testWithouthSchufa: false
 schufaId: c3da5d02-4829-45a8-b631-0b68221e57e8
 bankName: m26
 standardRepaymentTime: 12

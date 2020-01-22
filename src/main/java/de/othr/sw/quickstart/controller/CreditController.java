@@ -1,27 +1,18 @@
 package de.othr.sw.quickstart.controller;
 
 import de.othr.sw.quickstart.dtos.Risikostufe;
-import de.othr.sw.quickstart.dtos.RiskDto;
-import de.othr.sw.quickstart.dtos.RiskResponseDto;
-import de.othr.sw.quickstart.entity.Account;
-import de.othr.sw.quickstart.entity.Credit;
-import de.othr.sw.quickstart.entity.Transaction;
 import de.othr.sw.quickstart.remoteRequest.RemoteSchufaHandlerIF;
-import de.othr.sw.quickstart.repository.AccountRepository;
 import de.othr.sw.quickstart.service.AccountServiceIF;
 import de.othr.sw.quickstart.service.CreditServiceIF;
 import de.othr.sw.quickstart.service.CustomerServiceIF;
-import de.othr.sw.quickstart.service.TransactionServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestClientException;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @Scope("session")
@@ -36,7 +27,7 @@ public class CreditController {
     @Autowired
     RemoteSchufaHandlerIF remoteSchufaHandler;
 
-    @RequestMapping("/request")
+    @RequestMapping(value = "/request", method = RequestMethod.GET)
     public String requestCredit(
             Model model,
             @ModelAttribute("amount") long amount,
@@ -68,7 +59,6 @@ public class CreditController {
             default:
                 model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
         }
-        model.addAttribute("riskEstimation", "There was a problem with the Schufa Service");
         return "credit";
     }
 }
